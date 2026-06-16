@@ -640,80 +640,56 @@
     /* ─── Footer ─────────────────────────────────────────────────── */
     footer {
       background: var(--navy);
-      color: rgba(255,255,255,.75);
       margin-top: 3rem;
     }
-    .footer-top {
-      max-width: 1280px;
+    .footer-simple {
+      max-width: 780px;
       margin: 0 auto;
-      padding: 3rem 1.5rem 2rem;
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 2.5rem;
+      padding: 2.2rem 1.5rem 1.8rem;
+      text-align: center;
     }
-    .footer-brand .logo-text { color: #fff; font-size: 1.2rem; }
-    .footer-brand .logo-text span { color: var(--gold); }
-    .footer-brand p {
-      font-size: .8rem;
-      line-height: 1.6;
-      margin-top: .75rem;
-      color: rgba(255,255,255,.55);
-      max-width: 260px;
+    .footer-disclaimer-heading {
+      font-family: 'Oswald', sans-serif;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.35);
+      margin-bottom: .6rem;
     }
-    .social-links {
-      display: flex;
-      gap: .6rem;
-      margin-top: 1.1rem;
+    .footer-disclaimer {
+      font-size: .78rem;
+      color: rgba(255,255,255,.45);
+      line-height: 1.75;
     }
-    .social-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.1);
+    .footer-divider {
+      width: 48px;
+      height: 2px;
+      background: rgba(255,255,255,.12);
+      border-radius: 2px;
+      margin: 1.2rem auto;
+    }
+    .footer-meta {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255,255,255,.75);
-      font-size: .75rem;
-      font-weight: 700;
-      transition: background .2s, color .2s;
-    }
-    .social-btn:hover { background: var(--gold); color: var(--navy); }
-    .footer-col h4 {
-      font-family: 'Oswald', sans-serif;
-      font-size: .95rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: .9rem;
-      letter-spacing: .04em;
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: .5rem; }
-    .footer-col ul li a {
-      font-size: .78rem;
-      color: rgba(255,255,255,.55);
-      transition: color .2s;
-    }
-    .footer-col ul li a:hover { color: var(--gold); }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,.1);
-      padding: 1.1rem 1.5rem;
-      max-width: 1280px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
-    .footer-bottom p { font-size: .72rem; color: rgba(255,255,255,.4); }
-    .footer-bottom-links { display: flex; gap: 1.2rem; }
-    .footer-bottom-links a {
-      font-size: .72rem;
-      color: rgba(255,255,255,.4);
+    .footer-meta span {
+      font-size: .7rem;
+      color: rgba(255,255,255,.3);
+    }
+    .footer-links {
+      display: flex;
+      gap: 1.1rem;
+    }
+    .footer-links a {
+      font-size: .7rem;
+      color: rgba(255,255,255,.35);
       transition: color .2s;
     }
-    .footer-bottom-links a:hover { color: rgba(255,255,255,.75); }
+    .footer-links a:hover { color: rgba(255,255,255,.75); }
 
     /* ─── Responsive ─────────────────────────────────────────────── */
     @media (max-width: 1024px) {
@@ -785,7 +761,6 @@
       <a href="#news">News</a>
     </nav>
     <div class="header-actions">
-      <button class="btn-subscribe">Subscribe</button>
       <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
         <span></span><span></span><span></span>
       </div>
@@ -798,7 +773,6 @@
     <a href="#matches">Matches</a>
     <a href="#analysis">Analysis</a>
     <a href="#news">News</a>
-    <a href="#">Subscribe</a>
   </div>
 </header>
 
@@ -1263,54 +1237,21 @@
 
 <!-- Footer -->
 <footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="logo-text">The <span>World</span> Cup Times</div>
-      <p>Independent reviews, match reports and analysis for the 2026 FIFA World Cup hosted across the United States, Canada and Mexico.</p>
-      <div class="social-links">
-        <a href="#" class="social-btn" aria-label="Twitter">X</a>
-        <a href="#" class="social-btn" aria-label="Instagram">In</a>
-        <a href="#" class="social-btn" aria-label="YouTube">Yt</a>
-        <a href="#" class="social-btn" aria-label="Facebook">Fb</a>
+  <div class="footer-simple">
+    <h4 class="footer-disclaimer-heading">Disclaimer</h4>
+    <p class="footer-disclaimer">
+      The World Cup Times is an independent editorial publication providing match reviews, analysis and commentary on the 2026 FIFA World Cup.
+      We are not affiliated with, endorsed by, or licensed by FIFA, any national football association, club or player referenced in our content.
+      All match data and statistics are sourced from publicly available information. Views expressed are those of our writers alone.
+    </p>
+    <div class="footer-divider"></div>
+    <div class="footer-meta">
+      <span>&copy; 2026 The World Cup Times. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-of-use.html">Terms of Use</a>
+        <a href="cookie-settings.html">Cookie Settings</a>
       </div>
-    </div>
-    <div class="footer-col">
-      <h4>Coverage</h4>
-      <ul>
-        <li><a href="#">Match Reviews</a></li>
-        <li><a href="#">Team Analyses</a></li>
-        <li><a href="#">Player Spotlights</a></li>
-        <li><a href="#">Tactics Board</a></li>
-        <li><a href="#">Predictions</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Tournament</h4>
-      <ul>
-        <li><a href="#">Group Stage</a></li>
-        <li><a href="#">Round of 32</a></li>
-        <li><a href="#">Knockout Stage</a></li>
-        <li><a href="#">Venues Guide</a></li>
-        <li><a href="#">Schedule</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Our Writers</a></li>
-        <li><a href="#">Advertise</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">RSS Feed</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 The World Cup Times. All rights reserved. Not affiliated with FIFA.</p>
-    <div class="footer-bottom-links">
-      <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="terms-of-use.html">Terms of Use</a>
-      <a href="cookie-settings.html">Cookie Settings</a>
     </div>
   </div>
 </footer>
