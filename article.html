@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Article — The World Cup Times</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:#f2f4f8;color:#1a1a2e;line-height:1.6}
+    img{display:block;width:100%;height:100%;object-fit:cover}
+    a{text-decoration:none;color:inherit}
+    :root{--navy:#002868;--red:#bf0a30;--gold:#f5c518;--light:#fff;--bg:#f2f4f8;--text:#1a1a2e;--muted:#6b7280;--border:#e5e7eb;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-h:0 8px 32px rgba(0,0,0,.14)}
+
+    /* top bar */
+    .top-bar{background:var(--navy);color:rgba(255,255,255,.7);font-size:.72rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:.45rem 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .tbl{display:flex;gap:1.4rem}.top-bar a{color:rgba(255,255,255,.7);transition:color .2s}.top-bar a:hover{color:var(--gold)}
+    .tbr{color:rgba(255,255,255,.45)}
+
+    /* header */
+    header{background:#fff;box-shadow:0 1px 0 var(--border);position:sticky;top:0;z-index:100}
+    .header-inner{max-width:1280px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:68px}
+    .logo{display:flex;align-items:center;gap:.7rem;flex-shrink:0}
+    .logo-badge{background:linear-gradient(135deg,var(--navy),#0040a8);color:#fff;font-family:'Oswald',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .55rem;border-radius:4px;line-height:1.2;text-align:center}
+    .logo-text{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.35rem;color:var(--navy)}.logo-text span{color:var(--red)}
+    nav{display:flex;align-items:center;gap:.25rem}
+    nav a{font-size:.82rem;font-weight:600;color:var(--text);padding:.45rem .75rem;border-radius:6px;transition:background .2s,color .2s;white-space:nowrap}
+    nav a:hover,nav a.active{background:var(--bg);color:var(--navy)}
+    .btn-sub{background:var(--red);color:#fff;font-size:.78rem;font-weight:700;padding:.5rem 1.1rem;border-radius:6px;border:none;cursor:pointer;transition:background .2s}
+    .btn-sub:hover{background:#a00826}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;border-radius:6px}
+    .hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px}
+    .mob-nav{display:none;background:#fff;border-top:1px solid var(--border);padding:1rem 1.5rem}
+    .mob-nav.open{display:block}
+    .mob-nav a{display:block;font-size:.9rem;font-weight:600;color:var(--text);padding:.65rem 0;border-bottom:1px solid var(--border)}
+    .mob-nav a:last-child{border-bottom:none}
+
+    /* progress */
+    #prog{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--red),var(--gold));width:0%;z-index:999}
+
+    /* hero */
+    .art-hero{position:relative;height:clamp(300px,48vh,540px);overflow:hidden}
+    .art-hero img{position:absolute;inset:0;width:100%;height:100%}
+    .hero-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.45) 50%,rgba(0,0,0,.1) 100%)}
+    .hero-top{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;padding:2.5rem;max-width:1280px;left:50%;transform:translateX(-50%);width:100%}
+    .breadcrumb{display:flex;align-items:center;gap:.45rem;font-size:.73rem;color:rgba(255,255,255,.6);flex-wrap:wrap;margin-bottom:.75rem}
+    .breadcrumb a{color:rgba(255,255,255,.7);transition:color .2s}.breadcrumb a:hover{color:var(--gold)}
+    .breadcrumb .sep{color:rgba(255,255,255,.3)}.breadcrumb .cur{color:rgba(255,255,255,.85)}
+    .h-tag{display:inline-flex;align-items:center;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;border-radius:4px;width:fit-content;margin-bottom:.6rem}
+    .h-tag.red{background:var(--red);color:#fff}.h-tag.gold{background:var(--gold);color:var(--navy)}.h-tag.navy{background:var(--navy);color:#fff;border:1px solid rgba(255,255,255,.25)}
+    .h-title{font-family:'Oswald',sans-serif;font-size:clamp(1.5rem,4vw,2.6rem);font-weight:700;color:#fff;line-height:1.12;max-width:760px;text-shadow:0 2px 12px rgba(0,0,0,.35);margin-bottom:.6rem}
+    .h-meta{display:flex;align-items:center;gap:1.2rem;color:rgba(255,255,255,.7);font-size:.78rem;flex-wrap:wrap}
+
+    /* layout */
+    .art-outer{max-width:1280px;margin:0 auto;padding:2.5rem 1.5rem 4rem;display:grid;grid-template-columns:1fr 320px;gap:3rem;align-items:start}
+
+    /* back */
+    .back-btn{display:inline-flex;align-items:center;gap:.45rem;font-size:.78rem;font-weight:600;color:var(--navy);border:1.5px solid var(--border);padding:.4rem .9rem;border-radius:20px;margin-bottom:1.4rem;transition:all .2s;background:#fff}
+    .back-btn:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+
+    /* article header */
+    .a-tag{display:inline-block;font-size:.64rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .65rem;border-radius:3px;margin-bottom:.7rem}
+    .a-tag.red{background:var(--red);color:#fff}.a-tag.gold{background:var(--gold);color:var(--navy)}.a-tag.navy{background:var(--navy);color:#fff}
+    .a-title{font-family:'Oswald',sans-serif;font-size:clamp(1.5rem,3.5vw,2.1rem);font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:1rem}
+    .a-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;padding-bottom:1rem;border-bottom:2px solid var(--border);margin-bottom:1.4rem}
+    .author-line{display:flex;align-items:center;gap:.6rem}
+    .av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--red));color:#fff;font-size:.7rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .an{font-size:.8rem;font-weight:600;color:var(--text)}.ad{font-size:.7rem;color:var(--muted)}
+    .stars{display:flex;align-items:center;gap:.2rem}
+    .star{color:var(--gold);font-size:.9rem}.star.empty{color:#d1d5db}
+    .rscore{font-size:.78rem;font-weight:700;color:var(--navy);margin-left:.2rem}
+
+    /* share bar */
+    .share-bar{display:flex;align-items:center;gap:.5rem;margin-bottom:1.8rem;padding-bottom:1.4rem;border-bottom:1px solid var(--border);flex-wrap:wrap}
+    .share-lbl{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+    .s-btn{font-size:.72rem;font-weight:600;padding:.28rem .7rem;border-radius:20px;border:1.5px solid var(--border);color:var(--text);cursor:pointer;transition:all .2s;background:#fff}
+    .s-btn:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+
+    /* body */
+    .a-body p{font-size:.97rem;line-height:1.78;color:#2d2d3e;margin-bottom:1.3rem}
+    .a-body p.lead{font-size:1.07rem;font-weight:500;line-height:1.72;color:var(--text);border-left:3px solid var(--red);padding-left:1rem;margin-bottom:1.8rem}
+    .a-body h2{font-family:'Oswald',sans-serif;font-size:1.28rem;font-weight:600;color:var(--navy);margin:2rem 0 .7rem}
+    .a-body h3{font-size:1rem;font-weight:700;color:var(--text);margin:1.4rem 0 .4rem}
+    .a-body ul,.a-body ol{margin:0 0 1.3rem 1.3rem}
+    .a-body li{font-size:.95rem;line-height:1.7;color:#2d2d3e;margin-bottom:.35rem}
+    .img-blk{border-radius:var(--radius);overflow:hidden;margin:1.8rem 0;aspect-ratio:16/9}
+
+    /* pull quote */
+    .pull{background:linear-gradient(135deg,#f0f4ff,#e8efff);border-left:4px solid var(--navy);border-radius:0 var(--radius) var(--radius) 0;padding:1.3rem 1.5rem;margin:2rem 0;position:relative;overflow:hidden}
+    .pull::before{content:'\201C';font-family:'Oswald',sans-serif;font-size:5rem;color:var(--navy);opacity:.08;position:absolute;top:-1rem;left:.8rem;line-height:1;pointer-events:none}
+    .pull p{font-family:'Oswald',sans-serif;font-size:1.15rem;font-weight:500;color:var(--navy);line-height:1.45;font-style:italic;margin:0 0 .5rem;position:relative}
+    .pull cite{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-style:normal}
+
+    /* stats */
+    .stats-box{background:linear-gradient(135deg,var(--navy),#0040a8);border-radius:var(--radius);padding:1.4rem 1.6rem;margin:2rem 0;color:#fff}
+    .sb-title{font-family:'Oswald',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:1rem;padding-bottom:.55rem;border-bottom:1px solid rgba(255,255,255,.1)}
+    .sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:1rem;text-align:center}
+    .sn{display:block;font-family:'Oswald',sans-serif;font-size:1.8rem;font-weight:700;color:var(--gold);line-height:1}
+    .sl{display:block;font-size:.66rem;color:rgba(255,255,255,.6);margin-top:.25rem;text-transform:uppercase;letter-spacing:.05em}
+
+    /* fact box */
+    .fact{background:#fffbeb;border:1.5px solid #fde68a;border-radius:var(--radius);padding:1.1rem 1.4rem;margin:1.8rem 0}
+    .fact-t{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#92400e;margin-bottom:.6rem}
+    .fact ul{margin:0 0 0 1.1rem}
+    .fact li{font-size:.86rem;color:#78350f;margin-bottom:.3rem;line-height:1.5}
+
+    /* verdict */
+    .verdict{background:linear-gradient(135deg,var(--navy),#003590);border-radius:var(--radius);padding:1.5rem 1.7rem;margin:2.5rem 0;color:#fff}
+    .vt{font-family:'Oswald',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.65rem}
+    .verdict p{font-size:.92rem;line-height:1.65;color:rgba(255,255,255,.9);margin:0 0 1rem}
+    .vs{display:flex;align-items:center;gap:.25rem}
+    .vs .star{font-size:1.05rem}.vlbl{font-size:.75rem;font-weight:600;color:rgba(255,255,255,.6);margin-left:.4rem}
+
+    /* tags */
+    .tags-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:2rem 0}
+    .tag-chip{font-size:.7rem;font-weight:600;color:var(--navy);background:#e8eeff;border-radius:20px;padding:.25rem .75rem;cursor:pointer;transition:background .2s}
+    .tag-chip:hover{background:#c7d3ff}
+
+    /* author bio */
+    .bio{display:flex;gap:1rem;align-items:flex-start;background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:1.3rem;margin-top:2.5rem}
+    .bio-av{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--red));color:#fff;font-size:.9rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .bio-name{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:.1rem}
+    .bio-role{font-size:.68rem;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.45rem}
+    .bio p{font-size:.8rem;color:var(--muted);line-height:1.55;margin:0}
+
+    /* sidebar */
+    .sidebar{display:flex;flex-direction:column;gap:1.4rem;position:sticky;top:84px}
+    .sc{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+    .sc-head{background:var(--navy);padding:.8rem 1.1rem;font-family:'Oswald',sans-serif;font-size:.85rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;display:flex;align-items:center;gap:.5rem}
+    .sc-head::before{content:'';width:3px;height:.9rem;background:var(--gold);border-radius:2px}
+    .sc-body{padding:.9rem 1.1rem}
+    .sri{display:flex;gap:.75rem;padding:.7rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity .2s}
+    .sri:last-child{border-bottom:none;padding-bottom:0}.sri:hover{opacity:.75}
+    .sri-img{width:68px;height:50px;border-radius:6px;overflow:hidden;flex-shrink:0}
+    .sri-img img{width:100%;height:100%}
+    .sri-text h4{font-size:.77rem;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:.2rem}
+    .sri-text span{font-size:.65rem;color:var(--muted)}
+
+    /* rating widget */
+    .rw{padding:1rem 1.1rem}
+    .rw p{font-size:.78rem;color:var(--muted);margin-bottom:.7rem}
+    .rw-stars{display:flex;gap:.3rem;margin-bottom:.6rem}
+    .rw-s{font-size:1.6rem;color:#d1d5db;cursor:pointer;transition:color .15s,transform .15s}
+    .rw-s:hover,.rw-s.on{color:var(--gold);transform:scale(1.1)}
+    .rw-lbl{font-size:.72rem;color:var(--muted);min-height:1rem}
+    .rw-btn{width:100%;background:var(--navy);color:#fff;font-size:.78rem;font-weight:700;border:none;border-radius:8px;padding:.6rem;cursor:pointer;margin-top:.6rem;transition:background .2s}
+    .rw-btn:hover{background:#001a4d}
+
+    /* newsletter widget */
+    .nw{padding:1.1rem}
+    .nw p{font-size:.78rem;color:var(--muted);margin-bottom:.75rem;line-height:1.5}
+    .nw input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:.55rem .8rem;font-size:.8rem;font-family:inherit;outline:none;margin-bottom:.5rem;transition:border-color .2s}
+    .nw input:focus{border-color:var(--navy)}
+    .nw button{width:100%;background:var(--red);color:#fff;font-size:.8rem;font-weight:700;border:none;border-radius:8px;padding:.6rem;cursor:pointer;transition:background .2s}
+    .nw button:hover{background:#a00826}
+
+    /* related */
+    .related-sec{background:#fff;border-top:1px solid var(--border);padding:3rem 1.5rem}
+    .rel-inner{max-width:1280px;margin:0 auto}
+    .sec-title{font-family:'Oswald',sans-serif;font-size:1.35rem;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:.6rem;margin-bottom:1.5rem}
+    .sec-title::before{content:'';width:4px;height:1.3rem;background:var(--red);border-radius:2px;display:block}
+    .rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+    .rc{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;cursor:pointer;transition:transform .25s,box-shadow .25s;color:inherit}
+    .rc:hover{transform:translateY(-4px);box-shadow:var(--shadow-h)}
+    .rc-img{aspect-ratio:16/9;overflow:hidden}
+    .rc-img img{width:100%;height:100%;transition:transform .4s}
+    .rc:hover .rc-img img{transform:scale(1.06)}
+    .rc-body{padding:1rem 1.1rem 1.2rem;flex:1;display:flex;flex-direction:column}
+    .rc-tag{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem}
+    .rc-body h3{font-family:'Oswald',sans-serif;font-size:.95rem;font-weight:600;color:var(--text);line-height:1.3;flex:1;margin-bottom:.5rem;transition:color .2s}
+    .rc:hover .rc-body h3{color:var(--navy)}
+    .rc-date{font-size:.65rem;color:var(--muted)}
+
+    /* footer */
+    footer{background:var(--navy);color:rgba(255,255,255,.75)}
+    .ft{max-width:1280px;margin:0 auto;padding:3rem 1.5rem 2rem;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2.5rem}
+    .fb .logo-text{color:#fff;font-size:1.2rem}.fb .logo-text span{color:var(--gold)}
+    .fb p{font-size:.8rem;line-height:1.6;margin-top:.75rem;color:rgba(255,255,255,.5);max-width:250px}
+    .soc{display:flex;gap:.6rem;margin-top:1rem}
+    .soc a{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.75);font-size:.7rem;font-weight:700;transition:background .2s,color .2s}
+    .soc a:hover{background:var(--gold);color:var(--navy)}
+    .fc h4{font-family:'Oswald',sans-serif;font-size:.92rem;font-weight:600;color:#fff;margin-bottom:.85rem;letter-spacing:.04em}
+    .fc ul{list-style:none}.fc li{margin-bottom:.45rem}
+    .fc a{font-size:.76rem;color:rgba(255,255,255,.5);transition:color .2s}.fc a:hover{color:var(--gold)}
+    .fb2{border-top:1px solid rgba(255,255,255,.1);padding:1.1rem 1.5rem;max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    .fb2 p{font-size:.7rem;color:rgba(255,255,255,.38)}
+    .fbl{display:flex;gap:1.2rem}.fbl a{font-size:.7rem;color:rgba(255,255,255,.38);transition:color .2s}.fbl a:hover{color:rgba(255,255,255,.7)}
+
+    /* responsive */
+    @media(max-width:1024px){.art-outer{grid-template-columns:1fr;gap:2rem}.sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:1rem}.rel-grid{grid-template-columns:repeat(2,1fr)}.ft{grid-template-columns:1fr 1fr}}
+    @media(max-width:768px){nav{display:none}.hamburger{display:flex}.tbl{display:none}.btn-sub{display:none}.sidebar{grid-template-columns:1fr}.rel-grid{grid-template-columns:1fr 1fr}.ft{grid-template-columns:1fr 1fr}.hero-top{padding:1.5rem 1.2rem}}
+    @media(max-width:560px){.rel-grid{grid-template-columns:1fr}.ft{grid-template-columns:1fr}.fb2{flex-direction:column;align-items:flex-start}.art-outer{padding:1.5rem 1rem 3rem}.sg{grid-template-columns:repeat(2,1fr)}.bio{flex-direction:column}.a-meta{flex-direction:column;align-items:flex-start}}
+  </style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<div class="top-bar">
+  <div class="tbl"><a href="index.html">Home</a><a href="#">Groups</a><a href="#">Schedule</a><a href="#">Teams</a></div>
+  <span class="tbr">Monday, June 16, 2026 &mdash; USA &bull; Canada &bull; Mexico</span>
+</div>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-badge">FIFA<br>WC 2026</div>
+      <div class="logo-text">The <span>World</span> Cup Times</div>
+    </a>
+    <nav>
+      <a href="index.html">Home</a><a href="index.html#reviews" class="active">Reviews</a>
+      <a href="#">Teams</a><a href="#">Matches</a><a href="#">Analysis</a><a href="#">News</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:.75rem">
+      <button class="btn-sub">Subscribe</button>
+      <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+  <div class="mob-nav" id="mobNav">
+    <a href="index.html">Home</a><a href="index.html#reviews">Reviews</a>
+    <a href="#">Teams</a><a href="#">Matches</a><a href="#">Analysis</a><a href="#">News</a><a href="#">Subscribe</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<div class="art-hero">
+  <img id="heroImg" src="" alt="" />
+  <div class="hero-ov"></div>
+  <div class="hero-top">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span class="sep">&rsaquo;</span>
+      <a href="#" id="heroCrumb">Reviews</a><span class="sep">&rsaquo;</span>
+      <span class="cur" id="heroCrumbTitle"></span>
+    </div>
+    <span class="h-tag" id="heroTag"></span>
+    <h1 class="h-title" id="heroTitle"></h1>
+    <div class="h-meta">
+      <span id="heroDate"></span>
+      <span id="heroAuthor"></span>
+      <span id="heroRead"></span>
+    </div>
+  </div>
+</div>
+
+<!-- Article layout -->
+<div class="art-outer">
+  <main>
+    <a href="index.html" class="back-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Back to Home
+    </a>
+
+    <span class="a-tag" id="artTag"></span>
+    <h1 class="a-title" id="artTitle"></h1>
+
+    <div class="a-meta">
+      <div class="author-line">
+        <div class="av" id="artAv"></div>
+        <div><div class="an" id="artAn"></div><div class="ad" id="artAd"></div></div>
+      </div>
+      <div class="stars" id="artStars"></div>
+    </div>
+
+    <div class="share-bar">
+      <span class="share-lbl">Share:</span>
+      <a href="#" class="s-btn">&#120143; Twitter</a>
+      <a href="#" class="s-btn">&#128451; Facebook</a>
+      <a href="#" class="s-btn" onclick="copyLink()">&#128279; Copy Link</a>
+    </div>
+
+    <div class="a-body" id="artBody"></div>
+
+    <div class="bio">
+      <div class="bio-av" id="bioAv"></div>
+      <div>
+        <div class="bio-name" id="bioName"></div>
+        <div class="bio-role" id="bioRole"></div>
+        <p id="bioPara"></p>
+      </div>
+    </div>
+  </main>
+
+  <aside class="sidebar">
+    <div class="sc">
+      <div class="sc-head">Rate This Article</div>
+      <div class="rw">
+        <p>How would you rate this review?</p>
+        <div class="rw-stars" id="rwStars">
+          <span class="rw-s" onclick="setRat(1)">&#9733;</span>
+          <span class="rw-s" onclick="setRat(2)">&#9733;</span>
+          <span class="rw-s" onclick="setRat(3)">&#9733;</span>
+          <span class="rw-s" onclick="setRat(4)">&#9733;</span>
+          <span class="rw-s" onclick="setRat(5)">&#9733;</span>
+        </div>
+        <div class="rw-lbl" id="rwLbl">Click to rate</div>
+        <button class="rw-btn" onclick="submitRat()">Submit Rating</button>
+      </div>
+    </div>
+
+    <div class="sc">
+      <div class="sc-head">Newsletter</div>
+      <div class="nw">
+        <p>Match reviews and analysis delivered every match day — free.</p>
+        <input type="email" placeholder="Your email address&hellip;" />
+        <button>Subscribe Free</button>
+      </div>
+    </div>
+
+    <div class="sc">
+      <div class="sc-head">More Reviews</div>
+      <div class="sc-body" id="sidebarRel"></div>
+    </div>
+  </aside>
+</div>
+
+<!-- Related -->
+<section class="related-sec">
+  <div class="rel-inner">
+    <h2 class="sec-title">You May Also Like</h2>
+    <div class="rel-grid" id="relGrid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div class="fb">
+      <div class="logo-text">The <span>World</span> Cup Times</div>
+      <p>Independent reviews, match reports and analysis for the 2026 FIFA World Cup.</p>
+      <div class="soc"><a href="#">X</a><a href="#">In</a><a href="#">Yt</a><a href="#">Fb</a></div>
+    </div>
+    <div class="fc"><h4>Coverage</h4><ul><li><a href="index.html#reviews">Match Reviews</a></li><li><a href="#">Team Analyses</a></li><li><a href="#">Player Spotlights</a></li><li><a href="#">Tactics Board</a></li></ul></div>
+    <div class="fc"><h4>Tournament</h4><ul><li><a href="#">Group Stage</a></li><li><a href="#">Round of 32</a></li><li><a href="#">Knockout Stage</a></li><li><a href="#">Venues Guide</a></li></ul></div>
+    <div class="fc"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Our Writers</a></li><li><a href="#">Contact</a></li><li><a href="#">RSS Feed</a></li></ul></div>
+  </div>
+  <div class="fb2">
+    <p>&copy; 2026 The World Cup Times. All rights reserved. Not affiliated with FIFA.</p>
+    <div class="fbl"><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a><a href="cookie-settings.html">Cookie Settings</a></div>
+  </div>
+</footer>
+
+<script>
+/* ─── Post Data ──────────────────────────────────────────── */
+const IMG = {
+  comp: 'Composite-of-five-photos-showing-Estevao-of-Brazil-Erling-Haaland-of-Norway-Andy-Robertson-of-Scotland-Marc-Cucurella-of-Spain-all-celebrating-and-the-World-Cup-trophy.webp',
+  fifa: 'FIFA.webp',
+  getty: 'GettyImages-453347919.webp',
+  stad: 'p0nr8w9y.jpg',
+  tri: 'pgtd5f14_trionda_625x300_03_October_25.webp',
+  misc: '4c8ad930-65d9-11ed-a6af-4f332dcec329.jpg.webp'
+};
+
+function stars(r){let h='';for(let i=1;i<=5;i++)h+=`<span class="star${i>r?' empty':''}">&#9733;</span>`;return h;}
+function statsBox(title,items){return`<div class="stats-box"><div class="sb-title">${title}</div><div class="sg">${items.map(([n,l])=>`<div><span class="sn">${n}</span><span class="sl">${l}</span></div>`).join('')}</div></div>`;}
+function pullQ(q,c){return`<blockquote class="pull"><p>${q}</p><cite>— ${c}</cite></blockquote>`;}
+function verdict(txt,r){return`<div class="verdict"><div class="vt">&#9917; Our Verdict</div><p>${txt}</p><div class="vs">${stars(r)}<span class="vlbl">${r.toFixed(1)} / 5</span></div></div>`;}
+function tags(...t){return`<div class="tags-row">${t.map(x=>`<span class="tag-chip">${x}</span>`).join('')}</div>`;}
+function imgBlk(src,alt){return`<div class="img-blk"><img src="${src}" alt="${alt}"/></div>`;}
+function fact(title,items){return`<div class="fact"><div class="fact-t">&#9889; ${title}</div><ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;}
+
+const POSTS = {
+
+  'estevao-prodigy':{
+    tag:'Player Review', tagCls:'gold', cat:'Player Review',
+    title:'Estevão: Brazil\'s 18-Year-Old Prodigy Takes the World by Storm',
+    author:'Rafael Kosta', initials:'RK', role:'Senior Football Correspondent',
+    bio:'Rafael has covered six FIFA World Cups and writes extensively on South American football. He is based in São Paulo and has contributed to ESPN Brasil, The Guardian and World Soccer magazine.',
+    date:'June 13, 2026', read:'8 min read', rating:5,
+    img:IMG.comp, imgAlt:'Estevão and 2026 World Cup stars',
+    related:['brazil-vs-mexico','top-10-moments','world-cup-guide'],
+    content:`
+      <p class="lead">There are generational talents, and then there is Estevão Willian. At 18 years old, in his first ever World Cup, the Chelsea winger has already rendered every superlative in football journalism woefully inadequate. He has not just arrived on the world stage — he has commandeered it.</p>
+      <h2>The Golden Boy Who Was Always Going to Be Here</h2>
+      <p>Born in 2007 in Palmarés, Bahia, Estevão signed for Palmeiras at age 10 after scouts spotted him in a futsal tournament. By 16, he was already a first-team regular, dribbling past seasoned professionals as though they were traffic cones. Chelsea paid a world-record fee for a teenager when they secured his signature in 2024, and he is repaying that faith with compound interest on football’s grandest stage.</p>
+      ${imgBlk(IMG.comp,'Estevão alongside the 2026 World Cup trophy')}
+      <h2>A Masterclass in Two Halves</h2>
+      <p>His first goal arrived in the 26th minute. Collecting the ball on the left flank with three Mexican defenders converging, he shifted his body weight twice, created space from nothing and curled the ball into the far top corner. The SoFi Stadium crowd of 76,000 produced a sound somewhere between a gasp and a roar. His second — a nutmeg, a stepover, the ball slipping through the goalkeeper’s legs — was arguably better.</p>
+      ${pullQ('He doesn’t play like an 18-year-old. He plays like someone who has been here before — and come back to finish what he started.','Dorival Júnior, Brazil Head Coach')}
+      <h2>The Numbers Behind the Magic</h2>
+      <p>In two group games: 2 goals, 2 assists, 11 of 13 dribbles completed, and 9 chances created — more than any other player in the tournament so far. His key-pass average of 4.5 per 90 minutes rivals the best creative midfielders in world football.</p>
+      ${statsBox('Estevão — Group Stage Statistics',[['2','Goals'],['2','Assists'],['85%','Dribble Success'],['9','Chances Created'],['4.5','Key Passes/90'],['9.4','Match Rating']])}
+      <h2>Can Anyone Stop Him?</h2>
+      <p>Teams will double up, foul early and attempt to crowd him physically. But when a second defender arrives, Estevão simply uses the space created elsewhere, threading passes of extraordinary precision into teammates’ runs. He is not merely a dribbler — he is a complete footballer who happens to dribble brilliantly. That composure at 18, in a World Cup, cannot be coached.</p>
+      ${fact('Did You Know?',['Youngest player to score twice in a WC group game since Pelé in 1958.','His £52m move to Chelsea was a world-record fee for a U-18 player.','He has scored in every senior Brazil appearance — 12 games, 14 goals.'])}
+      ${verdict('Estevão is the most exciting player at this World Cup and arguably the most thrilling teenage talent since Pelé in 1958. His pace, technique, composure and creativity make him virtually unplayable. We are witnessing the birth of a legend in real time.',5)}
+      ${tags('#Estevão','#Brazil','#WorldCup2026','#PlayerReview','#Chelsea')}
+    `
+  },
+
+  'world-cup-guide':{
+    tag:'Tournament Guide', tagCls:'navy', cat:'Tournament',
+    title:'A Complete Guide to the 2026 FIFA World Cup: Everything You Need to Know',
+    author:'Editorial Team', initials:'ET', role:'World Cup Times Editorial',
+    bio:'Our editorial team of ten specialists covers every angle of the tournament, from tactics to travel, from player profiles to packaging — so you don’t miss a moment of the greatest show on Earth.',
+    date:'June 10, 2026', read:'15 min read', rating:4.5,
+    img:IMG.fifa, imgAlt:'FIFA World Cup 2026 trophy and branding',
+    related:['48-team-format','metlife-stadium','top-10-moments'],
+    content:`
+      <p class="lead">The 2026 FIFA World Cup is unlike any that came before it. For the first time ever, 48 nations compete across 16 cities spanning three countries — the United States, Canada and Mexico. More teams, more games, more drama. Here is everything you need to know.</p>
+      <h2>Why 2026 Is Different</h2>
+      <p>FIFA’s decision to expand from 32 to 48 teams changes the mathematics of the tournament entirely. The group stage now features 16 groups of three, with the top two from each group plus eight best third-placed teams advancing to a Round of 32 — a format new to World Cup history. The result: 104 matches across 39 days, and more nations than ever with a genuine chance of glory.</p>
+      ${imgBlk(IMG.fifa,'FIFA World Cup 2026 official branding')}
+      <h2>The 16 Host Cities</h2>
+      <p>From Vancouver in the north to Guadalajara in the south, the tournament spans a continent. The United States hosts 11 venues including the final at MetLife Stadium, New Jersey. Canada contributes Toronto and Vancouver, while Mexico hosts three cities including the iconic Estadio Azteca, which will stage matches for the third time — a World Cup record.</p>
+      ${fact('Key Tournament Facts',['48 teams from 6 confederations across 16 host cities.','104 matches played over 39 days from June 11 to July 19.','MetLife Stadium (82,500) hosts the World Cup Final on July 19.','USA hosts 11 venues; Mexico and Canada host 3 each.'])}
+      ${pullQ('This is not just the biggest World Cup ever. It is the biggest sporting event in human history.','Gianni Infantino, FIFA President')}
+      <h2>Teams to Watch</h2>
+      <p>Brazil arrive as favourites on the back of a stunning qualification campaign and the emergence of Estevão. Argentina, as defending champions, carry Messi’s burning desire for a final farewell. France bring depth in every position. England, Spain, Germany and Portugal all have genuine title aspirations. Dark horses Norway and Scotland have already caused upsets in the group stage.</p>
+      ${statsBox('Tournament at a Glance',[['48','Teams'],['104','Matches'],['16','Host Cities'],['39','Days'],['3','Host Nations'],['$5B','Prize Fund']])}
+      ${verdict('The 2026 World Cup has already surpassed expectations in its opening days. The expanded format brings new stories, new nations and new heroes. Whatever your footballing allegiance, this is the tournament not to miss.',4.5)}
+      ${tags('#WorldCup2026','#FIFA','#USA2026','#TournamentGuide','#Football')}
+    `
+  },
+
+  'brazil-vs-mexico':{
+    tag:'Match Review', tagCls:'red', cat:'Match Review',
+    title:'Brazil 3–1 Mexico: Estevão’s Masterclass Lights Up Group D Opener',
+    author:'Rafael Kosta', initials:'RK', role:'Senior Football Correspondent',
+    bio:'Rafael has covered six FIFA World Cups and writes extensively on South American football. He is based in São Paulo and has contributed to ESPN Brasil, The Guardian and World Soccer magazine.',
+    date:'June 13, 2026', read:'8 min read', rating:5,
+    img:IMG.getty, imgAlt:'Brazil vs Mexico 2026 World Cup match action',
+    related:['estevao-prodigy','messi-100-goal','top-10-moments'],
+    content:`
+      <p class="lead">The SoFi Stadium in Inglewood had barely drawn breath after the opening ceremony when Estevão Willian announced himself to the world. Brazil’s 3–1 victory over Mexico was an emphatic statement of intent from the South American giants — and the beginning of what may be a legendary tournament for a teenage genius.</p>
+      <h2>A Perfect Opening Statement</h2>
+      <p>Dorival Júnior set his team up in a fluid 4-2-3-1, with Estevão as the nominal left winger free to roam across the front line. The pattern was clear from the first whistle: Brazil would press high, win the ball back quickly, and transition with devastating speed. Mexico, organised and disciplined under Jaime Lozano, could barely get out of their own half in the first 20 minutes.</p>
+      ${imgBlk(IMG.getty,'Match action from Brazil vs Mexico at SoFi Stadium')}
+      <h2>The Goals That Defined the Night</h2>
+      <p>The opener came in the 26th minute: Estevão received from Rodrygo, looked up, and curled an unstoppable effort into the far top corner from 22 yards. Mexico responded well, equalising through Hirving Lozano before the break after a defensive error from Marquinhos. But Vinicius Jr. restored the lead seven minutes into the second half with a clinical finish, and Estevão’s solo second — nutmeg, stepover, composed finish — sealed a deserved victory with 12 minutes to go.</p>
+      ${pullQ('We knew Estevão was special. But what he showed tonight — the composure, the hunger — it was beyond anything we could have dreamed.','Rafael Kosta, post-match report')}
+      <h2>Tactical Notes</h2>
+      <p>Mexico struggled to cope with Brazil’s interchanging front three. Their narrow midfield was repeatedly bypassed by Brazil’s wide players cutting inside, and their defensive line sat too deep to apply meaningful pressure. Jaime Lozano will need to find solutions for their remaining group games, or an early exit beckons.</p>
+      ${statsBox('Brazil 3–1 Mexico — Match Statistics',[['67%','Possession (Brazil)'],['17','Shots (Brazil)'],['5','Shots on Target (Mexico)'],['3','Goals (Brazil)'],['12','Chances Created'],['89%','Pass Accuracy (Brazil)']])}
+      ${verdict('A scintillating performance from Brazil that will have other nations shaking. Estevão is the story of this tournament already. With three more group games at minimum to come, this team could reach extraordinary heights.',5)}
+      ${tags('#Brazil','#Mexico','#WorldCup2026','#MatchReview','#Estevão','#GroupD')}
+    `
+  },
+
+  'norway-dark-horse':{
+    tag:'Team Analysis', tagCls:'red', cat:'Team Analysis',
+    title:'Norway’s Dark Horse Campaign: Can Haaland Lead Them to Glory?',
+    author:'Sophie Mäkinen', initials:'SM', role:'European Football Analyst',
+    bio:'Sophie covers Scandinavian and Northern European football for The World Cup Times. A former youth international for Finland, she brings a player’s perspective to every tactical breakdown.',
+    date:'June 14, 2026', read:'6 min read', rating:4.5,
+    img:IMG.tri, imgAlt:'Norway squad celebrating their World Cup qualification',
+    related:['scotland-miracle','48-team-format','england-vs-iran'],
+    content:`
+      <p class="lead">Nobody gave Norway a chance. First-time World Cup qualifiers, a squad built around one extraordinary centre-forward, and placed in a group alongside Spain and Germany — pundits were already writing their obituary before a ball was kicked. Two games in, Norway sit second in the group and have sent shockwaves through the tournament.</p>
+      <h2>How Norway Got Here</h2>
+      <p>Credit must go to coach Ståle Solbakken for constructing a team capable of more than just holding on for dear life. Norway’s qualification campaign was built on Erling Haaland’s 15 goals in 10 games, but Solbakken built a functional, organised, high-energy team around him — one that presses relentlessly and converts its chances efficiently.</p>
+      ${imgBlk(IMG.tri,'Norway preparing for their 2026 World Cup group stage matches')}
+      <h2>Haaland: The Man-Mountain at the Centre of Everything</h2>
+      <p>Against Poland, Haaland registered two goals — a towering header and a trademark penalty — in a 2–0 victory that served as a warning to the rest of the tournament. His physicality in the air, his relentless running off the ball, and his ice-cold finishing are making opposing defences reorganise their entire gameplan around stopping one man. So far, none have succeeded.</p>
+      ${pullQ('Haaland at a World Cup, fit and in form, is every defender’s worst nightmare. He is simply unstoppable at the moment.','Sophie Mäkinen, The World Cup Times')}
+      <h2>Can the System Hold?</h2>
+      <p>Norway’s vulnerability lies at the back. Their high defensive line has been exposed on the counter-attack, and against Spain’s rapid wide players, the cracks showed before Haaland’s intervention bailed them out. Solbakken must decide whether to maintain the aggressive setup against Germany or drop deeper and protect the second-place spot they’ve earned.</p>
+      ${statsBox('Norway — Group Stage So Far',[['2','Wins'],['4','Goals Scored'],['1','Goal Conceded'],['3','Haaland Goals'],['1st','Most Headers Won'],['2nd','Group Standing']])}
+      ${verdict('Norway are the tournament’s most compelling dark horse. Their fate depends almost entirely on Haaland staying fit and effective — but when he does, they are capable of beating anyone. Don’t count them out.',4.5)}
+      ${tags('#Norway','#Haaland','#WorldCup2026','#DarkHorse','#TeamAnalysis')}
+    `
+  },
+
+  'spain-tactics':{
+    tag:'Tactics', tagCls:'gold', cat:'Tactics',
+    title:'Spain’s Tiki-Taka Evolution: De la Fuente’s 2026 Blueprint Decoded',
+    author:'Javier Criado', initials:'JC', role:'Tactics & Analysis Editor',
+    bio:'Javier is a UEFA Pro Licence coach who spent eight years as an assistant manager in La Liga before transitioning to football journalism. His tactical breakdowns are read by coaches at every level of the game.',
+    date:'June 12, 2026', read:'9 min read', rating:4.8,
+    img:IMG.misc, imgAlt:'Spain celebrating a goal at the 2026 World Cup',
+    related:['world-cup-guide','48-team-format','estevao-prodigy'],
+    content:`
+      <p class="lead">The Spain of 2026 is not the Spain of 2010. Under Luis de la Fuente, the hallmarks of tiki-taka — the endless short passing, the positional domination — have been retained. But the tempo, the directness and the clinical edge that won them the Euro 2024 have been amplified. Spain are favourites, and their football has been breathtaking.</p>
+      <h2>The System: High Press, Quick Transitions</h2>
+      <p>De la Fuente deploys a 4-3-3 that morphs into a 3-2-5 in possession. The full-backs — particularly Marc Cucurella on the left — advance aggressively, creating overloads in wide areas. The three central midfielders (Pedri, Merino and Zubimendi) rotate brilliantly, ensuring Spain always have a passing outlet, while Lamine Yamal and Nico Williams threaten space behind opposing full-backs with devastating pace.</p>
+      ${imgBlk(IMG.misc,'Spain’s fluid 4-3-3 pressing system in action')}
+      <h2>Cucurella’s Role: The Secret Weapon</h2>
+      <p>Much of Spain’s attacking fluency runs through Marc Cucurella. His ability to advance from left-back into the attacking third, combine with Nico Williams in a 2v1 situation and deliver dangerous crosses has given Spain an extra attacking dimension that opponents have struggled to counter. Against Morocco, Cucurella created three chances and won the penalty that opened the scoring.</p>
+      ${pullQ('De la Fuente has solved the puzzle of how to be both dominant in possession and devastatingly direct on the transition. Spain in 2026 are the complete team.','Javier Criado, The World Cup Times')}
+      <h2>Who Can Stop Them?</h2>
+      <p>The honest answer is: not many. Brazil’s pace and creativity would offer the most threatening counter, and a potential quarter-final clash between the two giants is the game the whole tournament is building towards. For now, Spain are unbeaten, undefeated and looking every inch the side that will be lifting the trophy on July 19.</p>
+      ${statsBox('Spain — Group Stage Metrics',[['73%','Avg Possession'],['0','Goals Conceded'],['6','Goals Scored'],['28','Chances Created'],['94%','Pass Accuracy'],['1st','Group A Standing']])}
+      ${verdict('Spain are the most complete team at the 2026 World Cup. Their system is tactically sophisticated, their players are technically excellent, and their depth is unparalleled. They are the team to beat.',4.8)}
+      ${tags('#Spain','#Tactics','#WorldCup2026','#Cucurella','#DeLaFuente','#TikiTaka')}
+    `
+  },
+
+  'metlife-stadium':{
+    tag:'Venue Review', tagCls:'navy', cat:'Venue',
+    title:'MetLife Stadium: The World Cup Final Venue That Will Make History',
+    author:'Amanda Lyons', initials:'AL', role:'Stadium & Fan Experience Writer',
+    bio:'Amanda has visited 47 football stadiums across 22 countries while working for The World Cup Times. Her matchday experience guides have helped hundreds of thousands of fans plan unforgettable trips.',
+    date:'June 11, 2026', read:'7 min read', rating:4.3,
+    img:IMG.stad, imgAlt:'MetLife Stadium hosting the 2026 World Cup Final',
+    related:['world-cup-guide','usa-vs-ghana','top-10-moments'],
+    content:`
+      <p class="lead">At 82,500 capacity, MetLife Stadium is the largest venue in the 2026 World Cup — and on July 19, it will host the final. Having attended the opening week group game between USA and Canada there, we can report that the stadium more than lives up to its billing. This is a world-class venue worthy of football’s greatest occasion.</p>
+      <h2>Getting There and the Atmosphere Around It</h2>
+      <p>MetLife sits just outside East Rutherford, New Jersey, a 30-minute direct train ride from New York Penn Station on the NJ Transit Meadowlands line. On match day, the trains run every 15 minutes from the city, and the organisation has been impeccable. The fan zones in the surrounding parking lots are vast — with food trucks representing every participating nation, giant screens and live music creating a carnival atmosphere from three hours before kick-off.</p>
+      ${imgBlk(IMG.stad,'MetLife Stadium match day atmosphere at the 2026 World Cup')}
+      <h2>The Matchday Experience Inside</h2>
+      <p>The sightlines from the lower tier are genuinely exceptional — you feel close to the action regardless of where you sit. The upper tier is steep, creating a cauldron of noise that surprised us given the open-air design. Concessions are well-priced by American stadium standards, with a $10 beer and $12 hot dog. The LED ribbon boards around the stadium’s interior carry real-time statistics and replays that fans cannot see elsewhere — a nice touch.</p>
+      ${pullQ('Walking into MetLife on match day, with 82,000 fans roaring and the World Cup anthem playing, is one of the great sporting experiences of a lifetime.','Amanda Lyons, The World Cup Times')}
+      <h2>The Final Awaits</h2>
+      <p>FIFA’s decision to stage the World Cup Final at MetLife was controversial given the stadium has no roof and New Jersey in July can be unpredictable. But the open-air atmosphere only adds to the occasion. If the final is half as dramatic as the group game we attended, MetLife will cement its place in football history.</p>
+      ${statsBox('MetLife Stadium — Key Facts',[['82,500','Capacity'],['1983','Year Built'],['30 mins','From NYC Penn'],['5','Stars','FIFA Rating'],['July 19','Final Date'],['$2.1B','Renovation Cost']])}
+      ${verdict('MetLife Stadium is a superb venue for football — massive, atmospheric and superbly connected. The final could not have a better home. A memorable experience from start to finish.',4.3)}
+      ${tags('#MetLife','#WorldCupFinal','#USA2026','#VenueReview','#NewJersey')}
+    `
+  },
+
+  'messi-100-goal':{
+    tag:'Match Review', tagCls:'red', cat:'Match Review',
+    title:'Messi Scores Goal #100: Argentina’s Title Defence Begins in Style',
+    author:'Pablo Delgado', initials:'PD', role:'South America Correspondent',
+    bio:'Pablo has followed Lionel Messi’s international career since the 2006 World Cup in Germany. Based in Buenos Aires, he has witnessed every chapter of the greatest player’s story first-hand.',
+    date:'June 15, 2026', read:'10 min read', rating:5,
+    img:IMG.getty, imgAlt:'Messi celebrating his 100th international goal',
+    related:['brazil-vs-mexico','estevao-prodigy','scotland-miracle'],
+    content:`
+      <p class="lead">In the 87th minute of a match that threatened to define his World Cup legacy in the worst possible way, Lionel Messi stepped up to a free kick 25 yards from goal. Argentina were level at 1-1 against Saudi Arabia. The holders were 87 minutes from an opening-game defeat. He curled the ball over the wall, into the top corner, and scored his 100th international goal. Of course he did.</p>
+      <h2>The Match That Had Everything</h2>
+      <p>Argentina were dominant for 60 minutes, controlling possession, creating chances, and looking every inch the tournament favourites. Di María opened the scoring in the 22nd minute with a beautifully weighted chip, and the game appeared to be heading towards a comfortable victory. Saudi Arabia had other ideas. An Al-Dawsari equaliser in the 62nd minute from a set piece silenced the Rose Bowl crowd and transformed the match entirely.</p>
+      ${imgBlk(IMG.getty,'Argentina celebrating Messi’s historic 100th international goal')}
+      <h2>The 87th Minute</h2>
+      <p>With Argentina visibly nervous and Saudi Arabia growing in confidence, a foul 25 yards out gave Messi his moment. He stepped up slowly, took three deep breaths, and struck the ball with devastating precision over the Saudi wall and into the top-left corner. The goalkeeper did not move. Argentina’s bench erupted. The stadium, which had been hushed, became a wall of noise.</p>
+      ${pullQ('I have scored many goals in my life. But this one — at this moment, in this tournament — feels like something completely different.','Lionel Messi, post-match press conference')}
+      <h2>What It Means</h2>
+      <p>Messi now has 100 international goals and 180 appearances for Argentina. He is 38 years old and playing what he has described as his last World Cup. His performances have shown no sign of age-related decline; if anything, his reading of the game has become even more sophisticated as his explosive pace has slightly diminished. Argentina look every bit as dangerous as when they won it in Qatar 2022.</p>
+      ${statsBox('Messi — Career International Stats',[['100','Goals'],['180','Caps'],['3','World Cups'],['1','WC Title'],['2','Ballon d’Or (WC years)'],['#1','Active Goal Scorer']])}
+      ${verdict('A moment for the history books. Messi’s 100th international goal, scored in the 87th minute to save Argentina from a shocking group-stage defeat, is already one of the defining moments of this tournament. He continues to defy belief.',5)}
+      ${tags('#Messi','#Argentina','#WorldCup2026','#100Goals','#MatchReview','#Legend')}
+    `
+  },
+
+  '48-team-format':{
+    tag:'Opinion', tagCls:'gold', cat:'Opinion',
+    title:'Is the 48-Team Format a Blessing or a Curse? A Midway Verdict',
+    author:'Mia Thompson', initials:'MT', role:'Senior Sports Editor',
+    bio:'Mia has worked in sports journalism for 18 years, covering four World Cups for major international publications. She specialises in the intersection of football politics, economics and the fan experience.',
+    date:'June 14, 2026', read:'11 min read', rating:4.2,
+    img:IMG.fifa, imgAlt:'FIFA 2026 World Cup expanded 48-team format',
+    related:['world-cup-guide','norway-dark-horse','spain-tactics'],
+    content:`
+      <p class="lead">FIFA promised that expanding the World Cup to 48 teams would bring more drama, more diversity, and more magic moments. Three days into the tournament, the evidence is mixed — but cautiously optimistic. The format is imperfect, but its imperfections may be outweighed by its extraordinary capacity for surprise.</p>
+      <h2>The Case For: New Stories, New Nations</h2>
+      <p>Scotland’s stunning 2-1 victory over Germany. Norway’s first-ever World Cup appearance, producing an upset. Cameroon’s extraordinary defensive display against France. These are the moments that only exist because 48 teams competed instead of 32. For fans in countries who have never experienced the World Cup, this tournament represents an irreplaceable opportunity. That matters enormously.</p>
+      ${imgBlk(IMG.fifa,'Flags of all 48 participating nations at the 2026 World Cup')}
+      <h2>The Case Against: Quality Dilution</h2>
+      <p>The group-stage games between weaker nations have, in some cases, been poor spectacles. The Round of 32 — a format unique to this tournament — creates an additional round of fixtures that some argue dilutes the knockout drama. Critics point to the bloated schedule and the physical toll on players who travel between host cities across three time zones. These are legitimate concerns.</p>
+      ${pullQ('The World Cup should be the best football in the world. Not all 48 teams are playing the best football in the world. But perhaps that’s not the point.','Mia Thompson, The World Cup Times')}
+      <h2>The Verdict After Week One</h2>
+      <p>The expanded format has produced more upsets, more drama and more memorable moments than any equivalent period in recent World Cup history. Some games have been one-sided, but the same was true in 2018 and 2022. The Round of 32 eliminates the problem of dead rubber group deciders. On balance, the format is working — not perfectly, but well enough.</p>
+      ${statsBox('2026 vs 2022 — Opening Week Comparison',[['104','Total Matches (2026)'],['64','Total Matches (2022)'],['18','Upsets (Week 1)'],['9','Upsets (2022 Week 1)'],['48','Teams'],['32','Teams (2022)']])}
+      ${verdict('The jury is still out, but the evidence so far leans towards FIFA having made the right call. The new format brings chaos, colour and incredible stories. Football is better when more of the world can participate.',4.2)}
+      ${tags('#48Teams','#FIFA','#WorldCup2026','#Opinion','#Format','#Football')}
+    `
+  },
+
+  'england-vs-iran':{
+    tag:'Match Review', tagCls:'red', cat:'Match Review',
+    title:'England 3–0 Iran: Bellingham Orchestrates England’s Best Tournament Start in Decades',
+    author:'George Hart', initials:'GH', role:'England & Premier League Correspondent',
+    bio:'George has covered the England national team for The World Cup Times since 2018. He has been present for the highs of Euro 2020 and 2024 and the familiar lows that bookend English tournament football.',
+    date:'June 12, 2026', read:'8 min read', rating:4,
+    img:IMG.tri, imgAlt:'England celebrating against Iran at the 2026 World Cup',
+    related:['scotland-miracle','top-10-moments','usa-vs-ghana'],
+    content:`
+      <p class="lead">For once, England delivered. Gareth Southgate’s side put in their most commanding tournament opening in decades at AT&T Stadium, Dallas, dismantling Iran 3-0 with a display of fluid, confident football that had fans daring to dream. Jude Bellingham was, quite simply, magnificent.</p>
+      <h2>Bellingham Runs the Show</h2>
+      <p>From the first whistle, England’s No. 10 was everywhere: pressing, recovering, distributing, arriving in the box at the right moment. His headed opening goal from a Saka cross in the 23rd minute was expertly taken, but his overall performance — 9 ball recoveries, 4 key passes, 94% pass accuracy — is what separated this from a routine England performance.</p>
+      ${imgBlk(IMG.tri,'Jude Bellingham celebrating his opening goal against Iran')}
+      <h2>Three Goals, Three Different England</h2>
+      <p>Bellingham’s header was followed by a Harry Kane penalty in the 43rd minute, awarded after Bukayo Saka was bundled over in the box. Saka himself completed the scoring with a stunning volley from a Bellingham through-ball in the 67th minute. Three different goalscorers, three different types of goal. This felt like a team with genuine tactical variety, not just a plan A.</p>
+      ${pullQ('Tonight we showed a different England. We played with courage, with creativity, with belief. We must build on this.','Gareth Southgate, post-match press conference')}
+      <h2>The Warning Signs</h2>
+      <p>England conceded two threatening counter-attack opportunities that a more clinical opponent would have converted. The defensive line sits high and Iran’s pacey wingers exploited it twice in the second half. Against France or Brazil in the knockout stages, those vulnerabilities would be punished. Southgate will need to address them swiftly.</p>
+      ${statsBox('England 3–0 Iran — Match Statistics',[['63%','Possession'],['14','Shots'],['9','Shots on Target (Iran)'],['0','Goals Conceded'],['94%','Bellingham Pass Acc.'],['3','Goals']])}
+      ${verdict('England’s best World Cup opening since 2006. Bellingham’s display was world-class. The defence needs attention, but on this evidence, England are genuine contenders. For once, it might actually be coming home.',4)}
+      ${tags('#England','#Iran','#Bellingham','#WorldCup2026','#MatchReview','#GroupB')}
+    `
+  },
+
+  'usa-vs-ghana':{
+    tag:'Host Nation', tagCls:'navy', cat:'Match Review',
+    title:'USA 1–0 Ghana: Home Pressure, Giant Atmosphere and a Nervy Debut',
+    author:'Caitlin Ross', initials:'CR', role:'CONCACAF & MLS Correspondent',
+    bio:'Caitlin covers North American football for The World Cup Times and has followed the USMNT since 2014. A former youth national team player, she brings an insider’s understanding of American football culture.',
+    date:'June 11, 2026', read:'7 min read', rating:4.1,
+    img:IMG.misc, imgAlt:'USA fans at the Rose Bowl for the 2026 World Cup opener',
+    related:['metlife-stadium','top-10-moments','england-vs-iran'],
+    content:`
+      <p class="lead">The Rose Bowl has hosted some of football’s greatest moments — from the 1994 World Cup Final to the USA’s epic run that captured a nation’s imagination. On June 11, 2026, it produced another: 90,000 Americans in full voice, their team under enormous pressure, and Christian Pulisic delivering when it mattered most.</p>
+      <h2>A Nation Holds Its Breath</h2>
+      <p>The pressure on this USMNT squad is unlike anything in American football history. As hosts, with a genuine chance of advancing deep into the tournament, and with a passionate new generation of domestic fans watching for the first time, every touch in the opening minutes was greeted with nervous energy. Ghana, who famously knocked the USA out in 2010, were organised and dangerous, and the first half was anything but comfortable.</p>
+      ${imgBlk(IMG.misc,'90,000 USA fans at the Rose Bowl for the 2026 World Cup opener')}
+      <h2>Pulisic’s Moment</h2>
+      <p>The decisive moment came in the 61st minute. Tyler Adams played a perfectly weighted through-ball into Pulisic’s run, and the Chelsea captain met it with a precise header across goal that beat the Ghanaian goalkeeper low to his right. The stadium erupted. For the next 29 minutes, every tackle was greeted with a roar, every clearance with a cheer, every Ghana attack with collective anxiety.</p>
+      ${pullQ('When that header went in, I’ve never heard anything like it. 90,000 people losing their minds at once. It was the most incredible moment of my football life.','Christian Pulisic, post-match interview')}
+      <h2>Surviving the Scare</h2>
+      <p>Ghana had a goal ruled out by VAR in the 78th minute after a lengthy review — a handball decision that left the Ghanaian players furious but which replays suggested was correct. Matt Turner made two crucial saves in the final 10 minutes to preserve the clean sheet. USA may have been fortunate; they were also resolute.</p>
+      ${statsBox('USA 1–0 Ghana — Match Statistics',[['54%','Possession (USA)'],['8','Shots (USA)'],['7','Shots (Ghana)'],['2','Matt Turner Saves'],['90,000','Attendance'],['VAR','Match-Defining Moment']])}
+      ${verdict('A win is a win, and in a World Cup opener for a host nation under this much pressure, that is everything. USA’s performance was nervy but ultimately effective. Pulisic’s moment will be remembered for decades.',4.1)}
+      ${tags('#USA','#Ghana','#WorldCup2026','#HostNation','#Pulisic','#RoseBowl')}
+    `
+  },
+
+  'top-10-moments':{
+    tag:'Feature', tagCls:'gold', cat:'Feature',
+    title:'Top 10 Moments From the First Week of the 2026 World Cup',
+    author:'Elena Brandt', initials:'EB', role:'Features Editor',
+    bio:'Elena has been writing about football for 15 years, specialising in features and long-form journalism. Her work has appeared in The Athletic, Sports Illustrated and The Sunday Times.',
+    date:'June 16, 2026', read:'12 min read', rating:4.9,
+    img:IMG.stad, imgAlt:'Spectacular moments from the first week of the 2026 World Cup',
+    related:['brazil-vs-mexico','messi-100-goal','scotland-miracle'],
+    content:`
+      <p class="lead">Upsets, magic goals, record breakers, roaring crowds and sporting miracles — the opening week of the 2026 FIFA World Cup has delivered everything. From 90,000 fans at the Rose Bowl to Messi’s 100th international goal, these are the ten moments that have defined football’s greatest ever tournament so far.</p>
+      <h2>#10: Scotland’s Goalkeeper Stops Germany Three Times in a Minute</h2>
+      <p>Craig Gordon’s triple save sequence in the 67th minute of Scotland vs Germany — three point-blank stops from Thomas Müller, Kai Havertz and Leroy Sané in the space of 23 seconds — had the watching world in disbelief. Scotland went on to win 2-1. Gordon was immediately dubbed ‘The Tartan Wall’ by delirious fans online.</p>
+      <h2>#9: Haaland’s Bicycle Kick Against Poland</h2>
+      <p>Norway’s opening goal in their 2-0 victory over Poland came via the most audacious technique imaginable. A deep cross from the right, Haaland’s back to goal 12 yards out, and a scissor kick that gave the goalkeeper absolutely no chance. Replays showed his left boot connecting at a height of 1.94 metres. The Norwegian bench went berserk.</p>
+      ${imgBlk(IMG.stad,'Week 1 World Cup moments compilation')}
+      <h2>#8 to #4: Drama All Around the World</h2>
+      <ul>
+        <li><strong>#8:</strong> Cameroon 1–0 France — The biggest upset of the group stage. Vincent Aboubakar’s late header. Paris in shock.</li>
+        <li><strong>#7:</strong> Japan’s 2-1 comeback win over Spain, echoing their 2022 heroics with yet another stunning tournament upset.</li>
+        <li><strong>#6:</strong> 90,000 USA fans at the Rose Bowl creating the loudest atmosphere in World Cup history (measured at 132 decibels).</li>
+        <li><strong>#5:</strong> The moment Estevão nutmegged, stepped over, then chipped the Mexican goalkeeper. Football genius captured in five seconds.</li>
+        <li><strong>#4:</strong> Cucurella’s 90th-minute equaliser against Germany that sent Spain through the group — and sparked wild scenes in the stands.</li>
+      </ul>
+      ${pullQ('This has been the most extraordinary opening week in World Cup history. And we are only just getting started.','Elena Brandt, The World Cup Times')}
+      <h2>#3 to #1: The Moments We Will Never Forget</h2>
+      <ul>
+        <li><strong>#3:</strong> Estevão’s solo second goal against Mexico — already a contender for goal of the tournament at just week one.</li>
+        <li><strong>#2:</strong> Messi’s 100th international goal: a free kick in the 87th minute to save Argentina. The greatest player who ever lived, still delivering.</li>
+        <li><strong>#1:</strong> The entire Rose Bowl in Pasadena, California — every person on their feet, every heart racing, as USA held on against Ghana. A nation fell in love with football all over again.</li>
+      </ul>
+      ${statsBox('Week 1 By The Numbers',[['18','Upsets'],['67','Goals Scored'],['104','Chances Created'],['3','Hat-Tricks'],['1','VAR Decision overturned'],['132dB','Loudest Crowd']])}
+      ${verdict('The 2026 World Cup has, in seven days, already delivered more extraordinary moments than most entire tournaments manage. If this is week one, the knockout stages may be the greatest football the world has ever witnessed.',4.9)}
+      ${tags('#Top10','#WorldCup2026','#BestMoments','#Feature','#Football','#2026')}
+    `
+  },
+
+  'scotland-miracle':{
+    tag:'Match Review', tagCls:'red', cat:'Match Review',
+    title:'Scotland’s Miracle: Robertson Leads the Tartan Army Into the Last 16',
+    author:'Fiona MacLeod', initials:'FM', role:'Scottish Football Correspondent',
+    bio:'Fiona is from Glasgow and has covered Scottish football, from Hampden to the terraces of the Championship, for 12 years. She was among the 40,000 Tartan Army fans who made the trip to Dallas for this unforgettable night.',
+    date:'June 15, 2026', read:'9 min read', rating:4.4,
+    img:IMG.comp, imgAlt:'Andy Robertson leading Scotland to a historic 2-1 win over Germany',
+    related:['norway-dark-horse','england-vs-iran','top-10-moments'],
+    content:`
+      <p class="lead">Nobody gave Scotland a prayer. Nobody. Placed in a group with Germany and ranked 28th in the world, Steve Clarke’s side were widely expected to provide a gentle warm-up for the European giants before a dignified exit. Instead, in front of 40,000 delirious Tartan Army fans at Cotton Bowl Stadium in Dallas, Scotland produced the greatest result in their history.</p>
+      <h2>How They Did It</h2>
+      <p>Clarke set his team up in a deep 4-5-1 that became a 4-4-2 out of possession, sitting in two compact banks of four and inviting Germany onto them. It was disciplined, organised and, for 55 minutes, effective. Germany had 71% of possession but were restricted to long-range efforts. Scotland’s threat on the counter was their weapon, and Robertson — as captain and as a player — was the embodiment of that approach.</p>
+      ${imgBlk(IMG.comp,'Andy Robertson and Scotland celebrating their historic 2-1 victory over Germany')}
+      <h2>The Goals: Germany Strike First, Scotland Reply Twice</h2>
+      <p>Thomas Müller broke the deadlock with a header from a corner in the 12th minute, and for a period it looked like the familiar Scotland script was unfolding. But Lyndon Dykes’s equaliser from a Robertson cross in the 51st minute changed everything. The Cotton Bowl erupted. Scotland suddenly believed. And in the 88th minute, Robertson himself — timing his run perfectly — met a Scott McTominay knockdown and volleyed into the bottom corner. Pandemonium.</p>
+      ${pullQ('I have played in Champions League finals. I have experienced every kind of football atmosphere. But nothing compares to what I felt in Dallas tonight. Nothing.','Andy Robertson, post-match interview')}
+      <h2>What This Means for Scottish Football</h2>
+      <p>Scotland last qualified for a World Cup in 1998. They have been absent for 28 years. Not just returning, but beating Germany in the group stage to qualify for the Round of 32, will transform how a generation of Scottish children view football. Clarke called it ‘the greatest night in 50 years of Scottish football.’ It is hard to argue.</p>
+      ${statsBox('Scotland 2–1 Germany — Match Statistics',[['29%','Possession (Scotland)'],['4','Shots (Scotland)'],['22','Shots (Germany)'],['2','Goals (Scotland)'],['88’','Robertson Winner'],['28 yrs','Since Last WC']])}
+      ${verdict('An extraordinary, historic achievement from Scotland. Robertson’s leadership and Clarke’s tactical discipline deserve the highest praise. The Tartan Army have waited 28 years for a night like this. It was worth every second.',4.4)}
+      ${tags('#Scotland','#Germany','#Robertson','#WorldCup2026','#Miracle','#TartanArmy')}
+    `
+  }
+};
+
+/* ─── Helpers ────────────────────────────────────────────── */
+function getSlug(){return new URLSearchParams(location.search).get('post')||'estevao-prodigy';}
+function starsHtml(r){let h='';for(let i=1;i<=5;i++)h+=`<span class="star${i>r?' empty':''}">&#9733;</span>`;return h+`<span class="rscore">${r.toFixed(1)} / 5</span>`;}
+
+function render(){
+  const slug=getSlug();
+  const p=POSTS[slug]||POSTS['estevao-prodigy'];
+
+  document.title=p.title+' — The World Cup Times';
+
+  // hero
+  const hi=document.getElementById('heroImg');hi.src=p.img;hi.alt=p.imgAlt;
+  document.getElementById('heroCrumb').textContent=p.cat;
+  document.getElementById('heroCrumbTitle').textContent=p.title.length>55?p.title.slice(0,55)+'…':p.title;
+  const ht=document.getElementById('heroTag');ht.textContent=p.tag;ht.className='h-tag '+p.tagCls;
+  document.getElementById('heroTitle').textContent=p.title;
+  document.getElementById('heroDate').textContent=p.date;
+  document.getElementById('heroAuthor').textContent='By '+p.author;
+  document.getElementById('heroRead').textContent=p.read;
+
+  // article header
+  const at=document.getElementById('artTag');at.textContent=p.tag;at.className='a-tag '+p.tagCls;
+  document.getElementById('artTitle').textContent=p.title;
+  document.getElementById('artAv').textContent=p.initials;
+  document.getElementById('artAn').textContent='By '+p.author+' — '+p.role;
+  document.getElementById('artAd').textContent=p.date+' · '+p.read;
+  document.getElementById('artStars').innerHTML=starsHtml(p.rating);
+
+  // body
+  document.getElementById('artBody').innerHTML=p.content;
+
+  // author bio
+  document.getElementById('bioAv').textContent=p.initials;
+  document.getElementById('bioName').textContent=p.author;
+  document.getElementById('bioRole').textContent=p.role;
+  document.getElementById('bioPara').textContent=p.bio;
+
+  // related articles (bottom grid)
+  const rg=document.getElementById('relGrid');
+  rg.innerHTML=p.related.map(id=>{
+    const r=POSTS[id];if(!r)return'';
+    return`<a href="article.html?post=${id}" class="rc"><div class="rc-img"><img src="${r.img}" alt="${r.imgAlt}"/></div><div class="rc-body"><div class="rc-tag">${r.cat}</div><h3>${r.title}</h3><div class="rc-date">${r.date} &bull; ${r.read}</div></div></a>`;
+  }).join('');
+
+  // sidebar related (exclude current)
+  const sids=Object.keys(POSTS).filter(k=>k!==slug).slice(0,4);
+  document.getElementById('sidebarRel').innerHTML=sids.map(id=>{
+    const r=POSTS[id];
+    return`<a href="article.html?post=${id}" class="sri"><div class="sri-img"><img src="${r.img}" alt=""/></div><div class="sri-text"><h4>${r.title}</h4><span>${r.date} &bull; ${r.cat}</span></div></a>`;
+  }).join('');
+}
+
+render();
+
+/* ─── UI ─────────────────────────────────────────────────── */
+function toggleNav(){document.getElementById('mobNav').classList.toggle('open');}
+
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  document.getElementById('prog').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';
+});
+
+const rwLabels=['','Poor','Fair','Good','Great','Excellent!'];
+let rwVal=0;
+function setRat(v){
+  rwVal=v;
+  document.querySelectorAll('.rw-s').forEach((s,i)=>s.classList.toggle('on',i<v));
+  document.getElementById('rwLbl').textContent=rwLabels[v];
+}
+function submitRat(){
+  if(!rwVal){alert('Please select a rating first.');return;}
+  document.querySelector('.rw').innerHTML=`<p style="text-align:center;font-weight:600;color:var(--navy);padding:.75rem 0">Thanks for your ${rwVal}★ rating!</p>`;
+}
+function copyLink(){navigator.clipboard&&navigator.clipboard.writeText(location.href);alert('Link copied!');}
+</script>
+</body>
+</html>

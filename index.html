@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFA World Cup 2026 — Reviews &amp; Match Reports</title>
+  <meta name="description" content="In-depth reviews, match reports, team analyses and player spotlights for the 2026 FIFA World Cup hosted across USA, Canada and Mexico." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f2f4f8;
+      color: #1a1a2e;
+      line-height: 1.6;
+    }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ─── CSS Variables ───────────────────────────────────────────── */
+    :root {
+      --navy:   #002868;
+      --red:    #bf0a30;
+      --gold:   #f5c518;
+      --light:  #ffffff;
+      --bg:     #f2f4f8;
+      --card:   #ffffff;
+      --text:   #1a1a2e;
+      --muted:  #6b7280;
+      --border: #e5e7eb;
+      --radius: 12px;
+      --shadow: 0 2px 12px rgba(0,0,0,.08);
+      --shadow-hover: 0 8px 32px rgba(0,0,0,.14);
+    }
+
+    /* ─── Top Bar ────────────────────────────────────────────────── */
+    .top-bar {
+      background: var(--navy);
+      color: rgba(255,255,255,.75);
+      font-size: .72rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: .45rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .top-bar-left { display: flex; gap: 1.4rem; }
+    .top-bar a { color: rgba(255,255,255,.75); transition: color .2s; }
+    .top-bar a:hover { color: var(--gold); }
+    .top-bar-date { color: rgba(255,255,255,.5); }
+
+    /* ─── Header / Nav ───────────────────────────────────────────── */
+    header {
+      background: var(--light);
+      box-shadow: 0 1px 0 var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      height: 68px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      flex-shrink: 0;
+    }
+    .logo-badge {
+      background: linear-gradient(135deg, var(--navy), #0040a8);
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .25rem .55rem;
+      border-radius: 4px;
+      line-height: 1.2;
+      text-align: center;
+    }
+    .logo-text {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: var(--navy);
+      letter-spacing: .02em;
+    }
+    .logo-text span { color: var(--red); }
+
+    nav { display: flex; align-items: center; gap: .25rem; }
+    nav a {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text);
+      padding: .45rem .75rem;
+      border-radius: 6px;
+      transition: background .2s, color .2s;
+      white-space: nowrap;
+    }
+    nav a:hover, nav a.active { background: var(--bg); color: var(--navy); }
+
+    .header-actions { display: flex; align-items: center; gap: .75rem; }
+    .btn-subscribe {
+      background: var(--red);
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      padding: .5rem 1.1rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-subscribe:hover { background: #a00826; transform: translateY(-1px); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: .4rem;
+      border-radius: 6px;
+      transition: background .2s;
+    }
+    .hamburger:hover { background: var(--bg); }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform .3s;
+    }
+
+    /* ─── Mobile Nav Drawer ──────────────────────────────────────── */
+    .mobile-nav {
+      display: none;
+      background: var(--light);
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+    }
+    .mobile-nav.open { display: block; }
+    .mobile-nav a {
+      display: block;
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      padding: .65rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .mobile-nav a:last-child { border-bottom: none; }
+
+    /* ─── Hero ───────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: clamp(380px, 60vh, 640px);
+      overflow: hidden;
+    }
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,.88) 0%,
+        rgba(0,0,0,.45) 50%,
+        rgba(0,0,0,.12) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 3rem 2rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      background: var(--red);
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .28rem .65rem;
+      border-radius: 4px;
+      margin-bottom: .9rem;
+      width: fit-content;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: block;
+    }
+    .hero h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      max-width: 760px;
+      text-shadow: 0 2px 12px rgba(0,0,0,.4);
+      margin-bottom: .75rem;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      color: rgba(255,255,255,.75);
+      font-size: .8rem;
+      flex-wrap: wrap;
+    }
+    .hero-meta span { display: flex; align-items: center; gap: .35rem; }
+    .hero-read-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: .82rem;
+      font-weight: 700;
+      padding: .65rem 1.4rem;
+      border-radius: 8px;
+      margin-top: 1.2rem;
+      width: fit-content;
+      transition: background .2s, transform .15s;
+    }
+    .hero-read-btn:hover { background: #e0b000; transform: translateY(-2px); }
+    .hero-read-btn svg { width: 16px; height: 16px; }
+
+    /* ─── Ticker ─────────────────────────────────────────────────── */
+    .ticker {
+      background: var(--navy);
+      color: #fff;
+      font-size: .78rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .ticker-label {
+      background: var(--red);
+      font-weight: 700;
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .6rem 1rem;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: flex;
+      gap: 2.5rem;
+      padding: .6rem 1.5rem;
+      animation: ticker-scroll 30s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    @keyframes ticker-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .ticker-item { opacity: .85; }
+    .ticker-dot { color: var(--gold); margin: 0 .5rem; }
+
+    /* ─── Main Layout ────────────────────────────────────────────── */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem;
+    }
+
+    /* ─── Section Headers ────────────────────────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      gap: 1rem;
+    }
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .section-title::before {
+      content: '';
+      width: 4px;
+      height: 1.4rem;
+      background: var(--red);
+      border-radius: 2px;
+      display: block;
+    }
+    .section-link {
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+      padding: .35rem .85rem;
+      border-radius: 20px;
+      transition: background .2s, color .2s;
+      white-space: nowrap;
+    }
+    .section-link:hover { background: var(--navy); color: #fff; }
+
+    /* ─── Featured / Spotlight ────────────────────────────────────── */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .featured-card {
+      display: block;
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      aspect-ratio: 16/10;
+      cursor: pointer;
+      color: inherit;
+    }
+    .featured-card img {
+      transition: transform .4s ease;
+    }
+    .featured-card:hover img { transform: scale(1.04); }
+    .featured-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.2) 60%, transparent 100%);
+    }
+    .featured-card-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.4rem;
+    }
+    .card-tag {
+      display: inline-block;
+      font-size: .64rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: var(--red);
+      color: #fff;
+      padding: .2rem .55rem;
+      border-radius: 3px;
+      margin-bottom: .55rem;
+    }
+    .card-tag.gold { background: var(--gold); color: var(--navy); }
+    .card-tag.navy { background: var(--navy); color: #fff; }
+    .featured-card-body h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.25;
+      margin-bottom: .4rem;
+    }
+    .featured-card-meta {
+      color: rgba(255,255,255,.65);
+      font-size: .72rem;
+      display: flex;
+      gap: .8rem;
+    }
+
+    /* ─── Article Cards Grid ─────────────────────────────────────── */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .article-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s ease, box-shadow .25s ease;
+      cursor: pointer;
+      color: inherit;
+    }
+    .article-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+    }
+    .article-card-img {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      position: relative;
+    }
+    .article-card-img img { transition: transform .4s ease; }
+    .article-card:hover .article-card-img img { transform: scale(1.06); }
+    .article-card-img .card-tag {
+      position: absolute;
+      top: .75rem;
+      left: .75rem;
+      z-index: 2;
+    }
+    .article-card-body {
+      padding: 1.1rem 1.2rem 1.3rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .article-card-body h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: .55rem;
+      transition: color .2s;
+    }
+    .article-card:hover .article-card-body h3 { color: var(--navy); }
+    .article-card-body p {
+      font-size: .82rem;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+      margin-bottom: .9rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .article-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: .75rem;
+      border-top: 1px solid var(--border);
+      gap: .5rem;
+    }
+    .article-author {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--navy), var(--red));
+      color: #fff;
+      font-size: .65rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: .02em;
+    }
+    .author-info { line-height: 1.2; }
+    .author-name { font-size: .7rem; font-weight: 600; color: var(--text); }
+    .article-date { font-size: .66rem; color: var(--muted); }
+    .read-time {
+      font-size: .68rem;
+      font-weight: 600;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: .3rem;
+      white-space: nowrap;
+    }
+    .read-time svg { width: 12px; height: 12px; opacity: .6; }
+
+    /* ─── Star Rating ─────────────────────────────────────────────── */
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: .25rem;
+      margin-bottom: .45rem;
+    }
+    .star { color: var(--gold); font-size: .85rem; }
+    .star.empty { color: #d1d5db; }
+    .rating-score {
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-left: .2rem;
+    }
+
+    /* ─── Stats Bar ───────────────────────────────────────────────── */
+    .stats-bar {
+      background: linear-gradient(135deg, var(--navy) 0%, #0040a8 100%);
+      border-radius: var(--radius);
+      padding: 1.8rem 2rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+    .stat-item { color: #fff; }
+    .stat-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .75rem;
+      color: rgba(255,255,255,.7);
+      margin-top: .3rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .stat-divider {
+      border-left: 1px solid rgba(255,255,255,.15);
+    }
+
+    /* ─── Newsletter Banner ───────────────────────────────────────── */
+    .newsletter {
+      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin: 2.5rem 0;
+    }
+    .newsletter-text h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: .3rem;
+    }
+    .newsletter-text p { font-size: .84rem; color: #5a4a3a; }
+    .newsletter-form {
+      display: flex;
+      gap: .6rem;
+      flex-shrink: 0;
+    }
+    .newsletter-form input {
+      border: 1.5px solid rgba(0,0,0,.15);
+      border-radius: 8px;
+      padding: .65rem 1rem;
+      font-size: .84rem;
+      font-family: inherit;
+      outline: none;
+      background: rgba(255,255,255,.8);
+      min-width: 220px;
+      transition: border-color .2s;
+    }
+    .newsletter-form input:focus { border-color: var(--navy); background: #fff; }
+    .newsletter-form button {
+      background: var(--navy);
+      color: #fff;
+      font-size: .82rem;
+      font-weight: 700;
+      padding: .65rem 1.3rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .2s, transform .15s;
+    }
+    .newsletter-form button:hover { background: #001a4d; transform: translateY(-1px); }
+
+    /* ─── Trending Sidebar Strip ──────────────────────────────────── */
+    .trending-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 2.5rem 0;
+    }
+    .trending-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      color: inherit;
+    }
+    .trending-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+    .trending-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--border);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 36px;
+    }
+    .trending-body { flex: 1; min-width: 0; }
+    .trending-body h4 {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: .25rem;
+      transition: color .2s;
+    }
+    .trending-card:hover .trending-body h4 { color: var(--navy); }
+    .trending-body span { font-size: .7rem; color: var(--muted); }
+
+    /* ─── Footer ─────────────────────────────────────────────────── */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.75);
+      margin-top: 3rem;
+    }
+    .footer-top {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .footer-brand .logo-text { color: #fff; font-size: 1.2rem; }
+    .footer-brand .logo-text span { color: var(--gold); }
+    .footer-brand p {
+      font-size: .8rem;
+      line-height: 1.6;
+      margin-top: .75rem;
+      color: rgba(255,255,255,.55);
+      max-width: 260px;
+    }
+    .social-links {
+      display: flex;
+      gap: .6rem;
+      margin-top: 1.1rem;
+    }
+    .social-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,.75);
+      font-size: .75rem;
+      font-weight: 700;
+      transition: background .2s, color .2s;
+    }
+    .social-btn:hover { background: var(--gold); color: var(--navy); }
+    .footer-col h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: .95rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: .9rem;
+      letter-spacing: .04em;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: .5rem; }
+    .footer-col ul li a {
+      font-size: .78rem;
+      color: rgba(255,255,255,.55);
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.1);
+      padding: 1.1rem 1.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .footer-bottom p { font-size: .72rem; color: rgba(255,255,255,.4); }
+    .footer-bottom-links { display: flex; gap: 1.2rem; }
+    .footer-bottom-links a {
+      font-size: .72rem;
+      color: rgba(255,255,255,.4);
+      transition: color .2s;
+    }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,.75); }
+
+    /* ─── Responsive ─────────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .articles-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      nav { display: none; }
+      .hamburger { display: flex; }
+      .top-bar-left { display: none; }
+      .featured-grid { grid-template-columns: 1fr; }
+      .newsletter { flex-direction: column; align-items: flex-start; }
+      .newsletter-form { flex-direction: column; width: 100%; }
+      .newsletter-form input { min-width: 0; width: 100%; }
+      .trending-strip { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .btn-subscribe { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .articles-grid { grid-template-columns: 1fr; }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      .hero-content { padding: 2rem 1.2rem; }
+      .container { padding: 1.5rem 1rem; }
+      .header-inner { padding: 0 1rem; }
+    }
+
+    /* ─── Scroll-reveal animation ─────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <div class="top-bar-left">
+    <a href="#">Groups</a>
+    <a href="#">Schedule</a>
+    <a href="#">Teams</a>
+    <a href="#">Standings</a>
+  </div>
+  <span class="top-bar-date">Monday, June 16, 2026 &mdash; USA &bull; Canada &bull; Mexico</span>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-badge">FIFA<br>WC 2026</div>
+      <div class="logo-text">The <span>World</span> Cup Times</div>
+    </a>
+    <nav>
+      <a href="#" class="active">Home</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#teams">Teams</a>
+      <a href="#matches">Matches</a>
+      <a href="#analysis">Analysis</a>
+      <a href="#news">News</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-subscribe">Subscribe</button>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#">Home</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#teams">Teams</a>
+    <a href="#matches">Matches</a>
+    <a href="#analysis">Analysis</a>
+    <a href="#news">News</a>
+    <a href="#">Subscribe</a>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <img class="hero-img" src="Composite-of-five-photos-showing-Estevao-of-Brazil-Erling-Haaland-of-Norway-Andy-Robertson-of-Scotland-Marc-Cucurella-of-Spain-all-celebrating-and-the-World-Cup-trophy.webp" alt="FIFA World Cup 2026 Stars" />
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-tag">Breaking</span>
+    <h1>FIFA World Cup 2026: The Greatest Tournament On Earth Begins</h1>
+    <div class="hero-meta">
+      <span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        June 11, 2026
+      </span>
+      <span>By Editorial Team</span>
+      <span>12 min read</span>
+    </div>
+    <a href="#reviews" class="hero-read-btn">
+      Read All Reviews
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- Ticker -->
+<div class="ticker">
+  <div class="ticker-label">&#9679;&nbsp; Live Updates</div>
+  <div class="ticker-track" id="tickerTrack">
+    <span class="ticker-item">Brazil 3–1 Mexico &mdash; Group D</span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">Haaland bags a brace for Norway vs. Poland</span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">Spain advance to Round of 16 with 2–0 win</span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">USA survive scare: 1–0 vs. Ghana in opener</span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">Argentina's Messi scores historic 100th international goal</span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">England beat Iran 3–0 in dominant Group B display</span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">Brazil 3–1 Mexico &mdash; Group D</span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">Haaland bags a brace for Norway vs. Poland</span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">Spain advance to Round of 16 with 2–0 win</span>
+    <span class="ticker-dot">&bull;</span>
+    <span class="ticker-item">USA survive scare: 1–0 vs. Ghana in opener</span>
+    <span class="ticker-dot">&bull;</span>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+
+  <!-- Stats Bar -->
+  <div class="stats-bar reveal">
+    <div class="stat-item">
+      <div class="stat-num">48</div>
+      <div class="stat-label">Teams</div>
+    </div>
+    <div class="stat-item stat-divider">
+      <div class="stat-num">104</div>
+      <div class="stat-label">Matches</div>
+    </div>
+    <div class="stat-item stat-divider">
+      <div class="stat-num">16</div>
+      <div class="stat-label">Host Cities</div>
+    </div>
+    <div class="stat-item stat-divider">
+      <div class="stat-num">5.4M</div>
+      <div class="stat-label">Tickets Sold</div>
+    </div>
+  </div>
+
+  <!-- Featured Section -->
+  <div id="reviews">
+    <div class="section-header reveal">
+      <h2 class="section-title">Featured Reviews</h2>
+      <a href="#" class="section-link">View All &rarr;</a>
+    </div>
+
+    <div class="featured-grid reveal">
+      <a href="article.html?post=estevao-prodigy" class="featured-card">
+        <img src="Composite-of-five-photos-showing-Estevao-of-Brazil-Erling-Haaland-of-Norway-Andy-Robertson-of-Scotland-Marc-Cucurella-of-Spain-all-celebrating-and-the-World-Cup-trophy.webp" alt="Stars of 2026" />
+        <div class="featured-card-overlay"></div>
+        <div class="featured-card-body">
+          <span class="card-tag gold">Player Review</span>
+          <h3>Estev&atilde;o: Brazil's 18-Year-Old Prodigy Takes the World by Storm</h3>
+          <div class="featured-card-meta">
+            <span>June 13, 2026</span>
+            <span>8 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a href="article.html?post=world-cup-guide" class="featured-card">
+        <img src="FIFA.webp" alt="FIFA World Cup Trophy" />
+        <div class="featured-card-overlay"></div>
+        <div class="featured-card-body">
+          <span class="card-tag navy">Tournament</span>
+          <h3>A Complete Guide to the 2026 FIFA World Cup: Everything You Need to Know</h3>
+          <div class="featured-card-meta">
+            <span>June 10, 2026</span>
+            <span>15 min read</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Articles Grid -->
+  <div class="section-header reveal">
+    <h2 class="section-title">Latest Match Reviews</h2>
+    <a href="#" class="section-link">All Articles &rarr;</a>
+  </div>
+
+  <div class="articles-grid" id="teams">
+
+    <!-- Card 1 -->
+    <a href="article.html?post=brazil-vs-mexico" class="article-card reveal">
+      <div class="article-card-img">
+        <img src="GettyImages-453347919.webp" alt="Match action" />
+        <span class="card-tag">Match Review</span>
+      </div>
+      <div class="article-card-body">
+        <div class="rating">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+          <span class="rating-score">5.0</span>
+        </div>
+        <h3>Brazil 3–1 Mexico: Estev&atilde;o's Masterclass Lights Up Group D Opener</h3>
+        <p>A scintillating hat-trick of world-class moments from 18-year-old Estev&atilde;o announced Brazil's arrival at the 2026 World Cup in emphatic fashion. The SoFi Stadium crowd of 75,000 witnessed something truly special as the Chels...</p>
+        <div class="article-card-footer">
+          <div class="article-author">
+            <div class="avatar">RK</div>
+            <div class="author-info">
+              <div class="author-name">Rafael Kosta</div>
+              <div class="article-date">June 13, 2026</div>
+            </div>
+          </div>
+          <span class="read-time">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            8 min
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 2 -->
+    <a href="article.html?post=norway-dark-horse" class="article-card reveal">
+      <div class="article-card-img">
+        <img src="pgtd5f14_trionda_625x300_03_October_25.webp" alt="Norway team" />
+        <span class="card-tag">Team Analysis</span>
+      </div>
+      <div class="article-card-body">
+        <div class="rating">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star empty">&#9733;</span>
+          <span class="rating-score">4.5</span>
+        </div>
+        <h3>Norway's Dark Horse Campaign: Can Haaland Lead Them to Glory?</h3>
+        <p>First-time qualifiers Norway have sent shockwaves through the tournament. With Erling Haaland registering two goals in their opening clash against Poland, coach St&aring;le Solbakken's tactical blueprint is working to perfection...</p>
+        <div class="article-card-footer">
+          <div class="article-author">
+            <div class="avatar">SM</div>
+            <div class="author-info">
+              <div class="author-name">Sophie Mäkinen</div>
+              <div class="article-date">June 14, 2026</div>
+            </div>
+          </div>
+          <span class="read-time">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            6 min
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 3 -->
+    <a href="article.html?post=spain-tactics" class="article-card reveal">
+      <div class="article-card-img">
+        <img src="4c8ad930-65d9-11ed-a6af-4f332dcec329.jpg.webp" alt="Spain vs opponents" />
+        <span class="card-tag gold">Tactics</span>
+      </div>
+      <div class="article-card-body">
+        <div class="rating">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+          <span class="rating-score">4.8</span>
+        </div>
+        <h3>Spain's Tiki-Taka Evolution: De la Fuente's 2026 Blueprint Decoded</h3>
+        <p>Spain's 2–0 dismantling of Morocco showcased a new, more direct brand of football under Luis de la Fuente. Cucurella's marauding runs from left-back and the ruthless pressing high lines have made Spain the neutrals' favourite...</p>
+        <div class="article-card-footer">
+          <div class="article-author">
+            <div class="avatar">JC</div>
+            <div class="author-info">
+              <div class="author-name">Javier Criado</div>
+              <div class="article-date">June 12, 2026</div>
+            </div>
+          </div>
+          <span class="read-time">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            9 min
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 4 -->
+    <a href="article.html?post=metlife-stadium" class="article-card reveal">
+      <div class="article-card-img">
+        <img src="p0nr8w9y.jpg" alt="World Cup stadium" />
+        <span class="card-tag navy">Venue</span>
+      </div>
+      <div class="article-card-body">
+        <div class="rating">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star empty">&#9733;</span>
+          <span class="rating-score">4.3</span>
+        </div>
+        <h3>MetLife Stadium: The World Cup Final Venue That Will Make History</h3>
+        <p>New Jersey's MetLife Stadium — the largest venue in the tournament at 82,500 capacity — hosted its first World Cup group game to rave reviews. From sightlines to atmosphere, we rate every aspect of the matchday experience...</p>
+        <div class="article-card-footer">
+          <div class="article-author">
+            <div class="avatar">AL</div>
+            <div class="author-info">
+              <div class="author-name">Amanda Lyons</div>
+              <div class="article-date">June 11, 2026</div>
+            </div>
+          </div>
+          <span class="read-time">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            7 min
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 5 -->
+    <a href="article.html?post=messi-100-goal" class="article-card reveal">
+      <div class="article-card-img">
+        <img src="GettyImages-453347919.webp" alt="Argentina celebrate" />
+        <span class="card-tag">Match Review</span>
+      </div>
+      <div class="article-card-body">
+        <div class="rating">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+          <span class="rating-score">5.0</span>
+        </div>
+        <h3>Messi Scores Goal #100: Argentina's Title Defense Begins in Style</h3>
+        <p>Leo Messi wrote another immortal chapter in his story. A curling free-kick in the 87th minute against Saudi Arabia secured a dramatic 2–1 victory for the holders, and gave football its perfect narrative arc for 2026...</p>
+        <div class="article-card-footer">
+          <div class="article-author">
+            <div class="avatar">PD</div>
+            <div class="author-info">
+              <div class="author-name">Pablo Delgado</div>
+              <div class="article-date">June 15, 2026</div>
+            </div>
+          </div>
+          <span class="read-time">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            10 min
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 6 -->
+    <a href="article.html?post=48-team-format" class="article-card reveal">
+      <div class="article-card-img">
+        <img src="FIFA.webp" alt="World Cup branding" />
+        <span class="card-tag gold">Opinion</span>
+      </div>
+      <div class="article-card-body">
+        <div class="rating">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star empty">&#9733;</span>
+          <span class="rating-score">4.2</span>
+        </div>
+        <h3>Is the 48-Team Format a Blessing or a Curse? A Midway Verdict</h3>
+        <p>With 48 teams on show for the first time ever, the expanded World Cup has divided opinion. We look at whether the quality of football — and the drama — has lived up to the ambition of football's grandest experiment...</p>
+        <div class="article-card-footer">
+          <div class="article-author">
+            <div class="avatar">MT</div>
+            <div class="author-info">
+              <div class="author-name">Mia Thompson</div>
+              <div class="article-date">June 14, 2026</div>
+            </div>
+          </div>
+          <span class="read-time">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            11 min
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 7 -->
+    <a href="article.html?post=england-vs-iran" class="article-card reveal">
+      <div class="article-card-img">
+        <img src="pgtd5f14_trionda_625x300_03_October_25.webp" alt="England players" />
+        <span class="card-tag">Match Review</span>
+      </div>
+      <div class="article-card-body">
+        <div class="rating">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star empty">&#9733;</span>
+          <span class="rating-score">4.0</span>
+        </div>
+        <h3>England 3–0 Iran: Bellingham Orchestrates England's Best Tournament Start in Decades</h3>
+        <p>Manager Gareth Southgate's England finally silenced their critics with a fluid, commanding display in Dallas. Jude Bellingham's all-action performance produced a goal, an assist and near-total midfield dominance for 90 minutes...</p>
+        <div class="article-card-footer">
+          <div class="article-author">
+            <div class="avatar">GH</div>
+            <div class="author-info">
+              <div class="author-name">George Hart</div>
+              <div class="article-date">June 12, 2026</div>
+            </div>
+          </div>
+          <span class="read-time">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            8 min
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 8 -->
+    <a href="article.html?post=usa-vs-ghana" class="article-card reveal">
+      <div class="article-card-img">
+        <img src="4c8ad930-65d9-11ed-a6af-4f332dcec329.jpg.webp" alt="USA team" />
+        <span class="card-tag navy">Host Nation</span>
+      </div>
+      <div class="article-card-body">
+        <div class="rating">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star empty">&#9733;</span>
+          <span class="rating-score">4.1</span>
+        </div>
+        <h3>USA 1–0 Ghana: Home Pressure, Giant Atmosphere and a Nervy Debut</h3>
+        <p>In front of 90,000 roaring fans at the Rose Bowl, the USMNT ground out a narrow but crucial victory. Christian Pulisic's second-half header may not have been pretty, but it sent the host nation's World Cup campaign to a flying start...</p>
+        <div class="article-card-footer">
+          <div class="article-author">
+            <div class="avatar">CR</div>
+            <div class="author-info">
+              <div class="author-name">Caitlin Ross</div>
+              <div class="article-date">June 11, 2026</div>
+            </div>
+          </div>
+          <span class="read-time">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            7 min
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 9 -->
+    <a href="article.html?post=top-10-moments" class="article-card reveal">
+      <div class="article-card-img">
+        <img src="p0nr8w9y.jpg" alt="World Cup atmosphere" />
+        <span class="card-tag gold">Feature</span>
+      </div>
+      <div class="article-card-body">
+        <div class="rating">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span>
+          <span class="rating-score">4.9</span>
+        </div>
+        <h3>Top 10 Moments From the First Week of the 2026 World Cup</h3>
+        <p>Stunners, upsets, red cards, comebacks and moments of pure genius — the opening week of the 48-team World Cup has delivered all of this and more. We rank the 10 greatest moments from a breathtaking start to the tournament...</p>
+        <div class="article-card-footer">
+          <div class="article-author">
+            <div class="avatar">EB</div>
+            <div class="author-info">
+              <div class="author-name">Elena Brandt</div>
+              <div class="article-date">June 16, 2026</div>
+            </div>
+          </div>
+          <span class="read-time">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            12 min
+          </span>
+        </div>
+      </div>
+    </a>
+
+    <!-- Card 10 -->
+    <a href="article.html?post=scotland-miracle" class="article-card reveal">
+      <div class="article-card-img">
+        <img src="Composite-of-five-photos-showing-Estevao-of-Brazil-Erling-Haaland-of-Norway-Andy-Robertson-of-Scotland-Marc-Cucurella-of-Spain-all-celebrating-and-the-World-Cup-trophy.webp" alt="Scotland Robertson" />
+        <span class="card-tag">Match Review</span>
+      </div>
+      <div class="article-card-body">
+        <div class="rating">
+          <span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star">&#9733;</span><span class="star empty">&#9733;</span>
+          <span class="rating-score">4.4</span>
+        </div>
+        <h3>Scotland's Miracle: Robertson Leads the Tartan Army Into the Last 16</h3>
+        <p>Nobody gave Scotland a chance in this tournament's toughest group, but Andy Robertson's leadership has galvanised a team that refuses to be written off. A stunning 2–1 comeback win over Germany was surely the shock of the group stage...</p>
+        <div class="article-card-footer">
+          <div class="article-author">
+            <div class="avatar">FM</div>
+            <div class="author-info">
+              <div class="author-name">Fiona MacLeod</div>
+              <div class="article-date">June 15, 2026</div>
+            </div>
+          </div>
+          <span class="read-time">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            9 min
+          </span>
+        </div>
+      </div>
+    </a>
+
+  </div><!-- end articles-grid -->
+
+  <!-- Newsletter -->
+  <div class="newsletter reveal" id="news">
+    <div class="newsletter-text">
+      <h3>Stay Ahead of the Game</h3>
+      <p>Get match reviews, team analyses and breaking news delivered to your inbox every match day.</p>
+    </div>
+    <form class="newsletter-form" onsubmit="return false;">
+      <input type="email" placeholder="Your email address&hellip;" />
+      <button type="submit">Subscribe Free</button>
+    </form>
+  </div>
+
+  <!-- Trending -->
+  <div id="analysis">
+    <div class="section-header reveal">
+      <h2 class="section-title">Trending Now</h2>
+    </div>
+    <div class="trending-strip">
+      <a href="article.html?post=world-cup-guide" class="trending-card reveal">
+        <div class="trending-num">01</div>
+        <div class="trending-body">
+          <h4>Group Stage Power Rankings: Every Team Rated After Week One</h4>
+          <span>June 16, 2026 &bull; 14 min read</span>
+        </div>
+      </a>
+      <a href="article.html?post=48-team-format" class="trending-card reveal">
+        <div class="trending-num">02</div>
+        <div class="trending-body">
+          <h4>VAR Controversy: The Decisions That Changed the 2026 World Cup</h4>
+          <span>June 15, 2026 &bull; 6 min read</span>
+        </div>
+      </a>
+      <a href="article.html?post=top-10-moments" class="trending-card reveal">
+        <div class="trending-num">03</div>
+        <div class="trending-body">
+          <h4>Golden Boot Race: Who's Leading the Scoring Charts So Far?</h4>
+          <span>June 16, 2026 &bull; 5 min read</span>
+        </div>
+      </a>
+      <a href="article.html?post=metlife-stadium" class="trending-card reveal">
+        <div class="trending-num">04</div>
+        <div class="trending-body">
+          <h4>Fan Experience Report: How the Three Host Nations Compare</h4>
+          <span>June 14, 2026 &bull; 8 min read</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</div><!-- end .container -->
+
+<!-- Footer -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo-text">The <span>World</span> Cup Times</div>
+      <p>Independent reviews, match reports and analysis for the 2026 FIFA World Cup hosted across the United States, Canada and Mexico.</p>
+      <div class="social-links">
+        <a href="#" class="social-btn" aria-label="Twitter">X</a>
+        <a href="#" class="social-btn" aria-label="Instagram">In</a>
+        <a href="#" class="social-btn" aria-label="YouTube">Yt</a>
+        <a href="#" class="social-btn" aria-label="Facebook">Fb</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Coverage</h4>
+      <ul>
+        <li><a href="#">Match Reviews</a></li>
+        <li><a href="#">Team Analyses</a></li>
+        <li><a href="#">Player Spotlights</a></li>
+        <li><a href="#">Tactics Board</a></li>
+        <li><a href="#">Predictions</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Tournament</h4>
+      <ul>
+        <li><a href="#">Group Stage</a></li>
+        <li><a href="#">Round of 32</a></li>
+        <li><a href="#">Knockout Stage</a></li>
+        <li><a href="#">Venues Guide</a></li>
+        <li><a href="#">Schedule</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Writers</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">RSS Feed</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2026 The World Cup Times. All rights reserved. Not affiliated with FIFA.</p>
+    <div class="footer-bottom-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-use.html">Terms of Use</a>
+      <a href="cookie-settings.html">Cookie Settings</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* Mobile Menu */
+  function toggleMenu() {
+    const nav = document.getElementById('mobileNav');
+    nav.classList.toggle('open');
+  }
+
+  /* Scroll-reveal */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  /* Duplicate ticker for seamless loop */
+  const track = document.getElementById('tickerTrack');
+  track.innerHTML += track.innerHTML;
+</script>
+</body>
+</html>
